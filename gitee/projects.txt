@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+<head>
+<title>项目 - sd4324530 (pyinjava) - 码云 Gitee.com</title>
+<link href="/assets/favicon-e87ded4710611ed62adc859698277663.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+<meta charset='utf-8'>
+<meta content='always' name='referrer'>
+<meta content='码云' property='og:site_name'>
+<meta content='Object' property='og:type'>
+<meta content='http://gitee.com/pyinjava/projects?page=1' property='og:url'>
+<meta content='https://gitee.com/logo_themecolor.png' itemprop='image' property='og:image'>
+<meta content='项目 - sd4324530 (pyinjava) - 码云 Gitee.com' itemprop='name' property='og:title'>
+<meta content='码云(gitee.com)是开源中国推出的代码托管平台，支持 Git 和 SVN，提供免费的私有仓库托管。目前已有超过 300 万的开发者选择码云。' property='og:description'>
+<meta content='码云,代码托管,git,Git@OSC,gitee.com,开源,项目管理,版本控制,开源代码,代码分享,项目协作,开源项目托管,免费代码托管,Git代码托管,Git托管服务' name='Keywords'>
+<meta content='sd4324530 的项目' itemprop='description' name='Description'>
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="authenticity_token" name="csrf-param" />
+<meta content="M4Nk5yRn+gk+gTGVDpt4CXkRngNfLhfn3UjMkHQr6kg=" name="csrf-token" />
+
+<link href="/assets/application-a536ef2e1b46a1e5e5331c27061e41f0.css" media="screen" rel="stylesheet" type="text/css" />
+<script src="/assets/application-ea1cc06677ca03b677c930d078d71a52.js" type="text/javascript"></script>
+<script src="/assets/lib/jquery.timeago.zh-CN-bcd91c2c27a815fa9a395595874b592b.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+window.gon = {};gon.locale="zh-CN";gon.all_taggings=[];
+//]]>
+</script>
+<script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript"></script>
+<script>
+  var title = document.title.replace(/( - Gitee| - 码云)$/, '')
+      imgUrl = '';
+  
+  document.addEventListener('DOMContentLoaded', function(event) {
+    var imgUrlEl = document.querySelector('.readme-box .markdown-body > img, .readme-box .markdown-body :not(a) > img');
+    imgUrl = imgUrlEl && imgUrlEl.getAttribute('src');
+  
+    if (!imgUrl) {
+      imgUrlEl = document.querySelector('meta[itemprop=image]');
+      imgUrl = imgUrlEl && imgUrlEl.getAttribute('content'); 
+      imgUrl = imgUrl || "https://gitee.com/logo_themecolor.png";
+    }
+  
+    wx.config({
+      debug: false,
+      appId: "wxff219d611a159737",
+      timestamp: "1541670797",
+      nonceStr: "183c9fc82283387cd4a3258952c31301",
+      signature: "c18430428a6507307ff5f6856c6d34d4dddce42e",
+      jsApiList: [
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage'
+      ]
+    });
+  
+    wx.ready(function () {
+      wx.onMenuShareTimeline({
+        title: title, // 分享标题
+        link: "https://gitee.com/pyinjava/projects?page=1", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: imgUrl // 分享图标
+      });
+      wx.onMenuShareAppMessage({
+        title: title, // 分享标题
+        link: "https://gitee.com/pyinjava/projects?page=1", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        desc: document.querySelector('meta[name=Description]').getAttribute('content'),
+        imgUrl: imgUrl // 分享图标
+      });
+    });
+    wx.error(function(res){
+      console.error('err', res)
+    });
+  })
+</script>
+
+<script type='text/x-mathjax-config'>
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [["$$","$$"],["\\[","\\]"]],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreClass: "container|files",
+    processClass: "markdown-body"
+  }
+});
+</script>
+<script src="https://gitee.com/uploads/resources/MathJax-2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script>
+  var messages = {
+    'zh-CN': {
+      addResult: '增加 <b>{term}</b>',
+      count: '已选择 {count}',
+      maxSelections: '最多 {maxCount} 个选择',
+      noResults: '未找到结果',
+      serverError: '连接服务器时发生错误'
+    },
+    'zh-TW': {
+      addResult: '增加 <b>{term}</b>',
+      count: '已選擇 {count}',
+      maxSelections: '最多 {maxCount} 個選擇',
+      noResults: '未找到結果',
+      serverError: '連接服務器時發生錯誤'
+    }
+  }
+  
+  if (messages[gon.locale]) {
+    $.fn.dropdown.settings.message = messages[gon.locale]
+  }
+</script>
+
+<!--[if lt IE 10]>
+<script>
+    window.location.href = "/incompatible.html";
+</script>
+<![endif]-->
+</head>
+
+<script src="/assets/dashboard/app-edec7b021f1b47ceba8eca83c42129af.js" type="text/javascript"></script>
+<script src="/assets/profiles/app-09856c65071d8cd07212a3c968b6ca9b.js" type="text/javascript"></script>
+<body class='git-user ui_basic profile' id='users-projects'>
+<header class='common-header fixed noborder' id='git-header-nav'>
+<div class='ui container'>
+<div class='ui menu'>
+<div class='item gitosc-logo'>
+<a href="/"><img class='ui inline image' height='28' src='/logo.svg?20171024' width='95'>
+<img class='ui inline black image' height='28' src='/logo-black.svg?20171024' width='95'>
+</a></div>
+<a href="/explore" class="item " title="开源软件">开源软件
+</a><a href="/enterprises" class="item " title="企业版">企业版
+<sup class='ui red label'>
+特惠
+</sup>
+</a><a href="/education" class="item " title="高校版">高校版
+</a><a href="https://blog.gitee.com/" class="item" id="gitee-blog" target="_blank" title="博客">博客
+</a><div class='right menu userbar' id='git-nav-user-bar'>
+<div class='item'>
+<form accept-charset="UTF-8" action="/search" autocomplete="on" data-text-filter="搜索格式不正确" data-text-require="搜索关键字不能少于1个" id="navbar-search-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+<div class='ui mini fluid input'>
+<input id="navbar-search-input" name="q" placeholder="搜索项目、代码片段..." type="text" value="" />
+<input id="navbar-search-type" name="type" type="hidden" />
+</div>
+</form>
+
+
+</div>
+<a href="/signup" class="item">注册
+</a><a href="/login" class="item">登录
+</a><script>
+  $('.destroy-user-session').click(function() {
+    $.cookie('access_token', null, { path: '/' });
+  })
+</script>
+
+</div>
+</div>
+</div>
+</header>
+
+<script>
+  Gitee.initNavbar()
+  Gitee.initRepoRemoteWay()
+</script>
+
+<div class='fixed-notice-messages'>
+<div class='ui info message' id='git-bulletin'>
+<a href=https://blog.gitee.com/2018/11/06/gitee_kubecon/ target='_blank'>码云企业版 11. 11 特惠，多年购买低至 7 折，还可获得价值 2400 元 KubeCon + CloudNativeCon 门票！点此了解详情</a>
+<i class='icon remove' id='remove-bulletin'></i>
+</div>
+<div class='ui container'>
+<div class='flash-messages' id='messages-container'></div>
+</div>
+</div>
+<script>
+  (function() {
+    $(function() {
+      var $error_box, alertTip, notify_content, notify_options, setCookie, template;
+  
+      template = '<div data-notify="container" class="ui {0} message" role="alert">' + '<i data-notify="dismiss" class="close icon"></i>' + '<span data-notify="message">{2}</span>' + '</div>';
+      notify_content = null;
+      notify_options = {};
+      alertTip = '';
+      $error_box = $(".flash_error.flash_error_box");
+      if (notify_options.type === 'error' && $error_box.length > 0 && !$.isEmptyObject(notify_content.message)) {
+        if (notify_content.message === 'captcha_fail') {
+          alertTip = "验证码不正确";
+        } else if (notify_content.message === 'not_found_in_database') {
+          alertTip = "帐号或者密码错误";
+        } else if (notify_content.message === 'not_found_and_show_captcha') {
+          alertTip = "帐号或者密码错误";
+        } else {
+          alertTip = notify_content.message;
+        }
+        $error_box.html(alertTip).show();
+      } else if (notify_content) {
+        notify_options.delay = 3000;
+        notify_options.template = template;
+        notify_options.offset = {
+          x: 10,
+          y: 30
+        };
+        notify_options.element = '#messages-container';
+        $.notify(notify_content, notify_options);
+      }
+      setCookie = function(name, value) {
+        $.cookie(name, value, {
+          path: '/',
+          expires: 365
+        });
+      };
+      $('#remove-bulletin').on('click', function() {
+        setCookie('remove_bulletin', "gitee-maintain-1541553879");
+        $('#git-bulletin').hide();
+      });
+      $('#remove-member-bulletin').on('click', function() {
+        setCookie('remove_member_bulletin', "gitee_member_bulletin");
+        $(this).parent().hide();
+      });
+      return $('#remove-gift-bulletin').on('click', function() {
+        setCookie('remove_gift_bulletin', "gitee-gift-bulletin");
+        $(this).parent().hide();
+      });
+    });
+  
+  }).call(this);
+</script>
+
+<!--[if lt IE 10]>
+<script>
+  window.location.href = "/incompatible.html"
+</script>
+<![endif]-->
+
+<div class='ui container' id='user-show-detail'>
+<div class='ui custom grid'>
+<div class='five wide column'>
+<div class='git-user-header'>
+<div class='git-user-profile'>
+<div class='git-user-avatar git-avatar-container'>
+<a href="/pyinjava"><img alt="113628_pyinjava" class="avatar" src="/uploads/28/113628_pyinjava.jpg?1419413164" />
+</a><div class='user-info' style='overflow: hidden; text-overflow: ellipsis;'>
+<a href="/pyinjava" class="git-user-name-link">sd4324530</a>
+<span>pyinjava</span>
+</div>
+</div>
+<div class='clear'></div>
+<div class='git-user-edit-follow-btn'>
+<a href="/login" class="mini ui orange button follow-login-btn" title="登录以Follow"><i class='icon empty heart'></i>关注
+</a></div>
+<div class='git-user-infodata'>
+<div class='ui grid'>
+<div class='four wide column'>
+<a href="/pyinjava/followers"><div class='follow-num' id='followers-number'>
+74
+</div>
+<span class='follow-txt'>
+Followers
+</span>
+</a></div>
+<div class='four wide column'>
+<a href="/pyinjava/starred"><div class='follow-num'>
+3
+</div>
+<span class='follow-txt'>
+Stars
+</span>
+</a></div>
+<div class='four wide column'>
+<a href="/pyinjava/following"><div class='follow-num'>
+0
+</div>
+<span class='follow-txt'>
+Following
+</span>
+</a></div>
+<div class='four wide column'>
+<a href="/pyinjava/watched"><div class='follow-num'>
+10
+</div>
+<span class='follow-txt'>
+Watches
+</span>
+</a></div>
+</div>
+<div class='clear'></div>
+</div>
+<div class='ui divider git-user-infodata-divider hidden'></div>
+<div class='git-user-bio'>
+<i class='iconfont icon-introduction'></i>
+<span>
+sd4324530 很懒, 啥也没写
+</span>
+</div>
+<div class='git-user-bio'>
+<i class='iconfont icon-weibo'></i>
+<a href='http://weibo.com/u/1728407960' target='_blank' title='http://weibo.com/u/1728407960'>http://weibo.com/u/1728407960</a>
+</div>
+<div class='git-user-bio'>
+<i class='iconfont icon-time'></i>
+<span class='join-time'>加入于</span>
+<span class='join-time timeago' title='2014-08-28 12:58:32 +0800'>
+2014-08-28 12:58
+</span>
+</div>
+</div>
+</div>
+<script>
+  var $followersNumber = $('#followers-number');
+  $('.follow-or-unfollow-btn').click(function() {
+    var $this = $(this);
+    var thisBtn = this;
+    if ($this.hasClass('active-btn')) {
+      $.ajax({
+        url: "/pyinjava/follow",
+        type: "POST",
+        success: function(res) {
+          if (res.code == 1) {
+            $this.removeClass('active-btn');
+            thisBtn.childNodes[1].nodeValue = "取消关注";
+            $followersNumber.text(res.data.followers_count);
+          }
+        }
+      })
+    } else {
+      $.ajax({
+        url: "/pyinjava/unfollow",
+        type: "POST",
+        success: function(res) {
+          if (res.code == 1) {
+            $this.addClass('active-btn');
+            thisBtn.childNodes[1].nodeValue = "关注";
+            $followersNumber.text(res.data.followers_count);
+          }
+        }
+      })
+    }
+  })
+</script>
+
+
+<div class='ui top fluid text user-dashboard-sidebar-menu'>
+<a class='active item' data-tab='projects'>
+项目
+</a>
+</div>
+<div class='user-dashboard-sidebar-tabs'>
+<div class='active aligned attached bottom item-tab segment tab ui' data-tab='projects'>
+<div class='project-list'>
+<table class='ui table unstackable'>
+<tr>
+<td>
+<div class='ui icon input search-project'>
+<input class='typeahead' placeholder='Search...' type='text'>
+<i class='iconfont icon-search'></i>
+</div>
+</td>
+</tr>
+<tr class='project'>
+<td class='project-content'>
+<i class="project-icon iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/pyinjava/jtuple" class="repository" style="padding-bottom: 0px" target="_blank" title="JTuple">JTuple</a>
+</td>
+</tr>
+<tr class='project'>
+<td class='project-content'>
+<i class="project-icon iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/pyinjava/fastweixin" class="repository" style="padding-bottom: 0px" target="_blank" title="fastweixin">fastweixin</a>
+</td>
+</tr>
+<tr class='project'>
+<td class='project-content'>
+<i class="project-icon iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/pyinjava/fastexcel" class="repository" style="padding-bottom: 0px" target="_blank" title="fastexcel">fastexcel</a>
+</td>
+</tr>
+<tr class='project'>
+<td class='project-content'>
+<i class="project-icon iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/pyinjava/webChat" class="repository" style="padding-bottom: 0px" target="_blank" title="webChat">webChat</a>
+</td>
+</tr>
+<tr class='project'>
+<td class='project-content'>
+<i class="project-icon iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/pyinjava/fastlock" class="repository" style="padding-bottom: 0px" target="_blank" title="fastlock">fastlock</a>
+</td>
+</tr>
+<tr class='hide projects-empty'>
+<td class='center aligned'>
+<div class='nothing_here_message' style='font-size:14px'>
+没有任何项目
+</div>
+</td>
+</tr>
+<tr>
+<td class='right aligned scan-more'>
+<a href="/pyinjava/projects">查看更多
+<i class='angle double right icon'></i>
+</a></td>
+</tr>
+</table>
+</div>
+<script>
+  $(document).ready(function() {
+    $('.git-dashboard-project-menu .add_projects').popup();
+    $('.git-dashboard-project-menu .item').tab();
+  });
+</script>
+<script>
+  (function() {
+    var projectMatcher, truncate;
+  
+    truncate = function(str, maxlen) {
+      if (str.length > maxlen) {
+        return str.substr(0, maxlen) + "...";
+      }
+      return str;
+    };
+  
+    projectMatcher = function(projects) {
+      var findMatches;
+  
+      return findMatches = function(q, cb) {
+        var matches, substrRegex;
+  
+        matches = void 0;
+        substrRegex = void 0;
+        matches = [];
+        substrRegex = new RegExp(q, "i");
+        $.each(projects, function(i, project) {
+          if (substrRegex.test(project.name)) {
+            return matches.push(project);
+          }
+        });
+        return cb(matches);
+      };
+    };
+  
+    $(function() {
+      var projects;
+  
+      projects = [
+        {
+          "name": "JTuple",
+          "fullname": "sd4324530/JTuple",
+          "url": "/pyinjava/jtuple"
+        }, {
+          "name": "fastweixin",
+          "fullname": "sd4324530/fastweixin",
+          "url": "/pyinjava/fastweixin"
+        }, {
+          "name": "fastexcel",
+          "fullname": "sd4324530/fastexcel",
+          "url": "/pyinjava/fastexcel"
+        }, {
+          "name": "webChat",
+          "fullname": "sd4324530/webChat",
+          "url": "/pyinjava/webChat"
+        }, {
+          "name": "fastlock",
+          "fullname": "sd4324530/fastlock",
+          "url": "/pyinjava/fastlock"
+        }, {
+          "name": "fastrpc",
+          "fullname": "sd4324530/fastrpc",
+          "url": "/pyinjava/fastrpc"
+        }, {
+          "name": "ECharts",
+          "fullname": "sd4324530/ECharts",
+          "url": "/pyinjava/ECharts"
+        }, {
+          "name": "pond",
+          "fullname": "sd4324530/pond",
+          "url": "/pyinjava/pond"
+        }, {
+          "name": "firePusher",
+          "fullname": "sd4324530/firePusher",
+          "url": "/pyinjava/firePusher"
+        }, {
+          "name": "teb",
+          "fullname": "sd4324530/teb",
+          "url": "/pyinjava/teb"
+        }
+      ];
+      $(".search-project .typeahead").typeahead({
+        hint: false,
+        highlight: true,
+        minLength: 1
+      }, {
+        name: "projects",
+        displayKey: "fullname",
+        source: projectMatcher(projects),
+        templates: {
+          suggestion: function(project) {
+            return '<a href="' + project.url + '"><p>' + truncate(project.fullname, 30) + '</p></a>';
+          }
+        }
+      });
+      return $('.tt-input').on('keydown', function(e) {
+        var _this;
+  
+        if (e.keyCode === 13 && $(this).val().indexOf('/') !== -1) {
+          _this = this;
+          return projects.forEach((function(e) {
+            if (e.fullname === $(_this).val()) {
+              return window.location.href = e.url;
+            }
+          }));
+        }
+      });
+    });
+  
+  }).call(this);
+</script>
+
+</div>
+</div>
+<script>
+  (function() {
+    var $menuItems = $('.user-dashboard-sidebar-menu .item'),
+        $menuTabs  = $('.user-dashboard-sidebar-tabs .item-tab');
+  
+    $menuItems.tab();
+  
+    if (!$menuItems.hasClass('active')) {
+      $menuItems.first().addClass('active');
+    }
+    if (!$menuTabs.hasClass('active')) {
+      $menuTabs.first().addClass('active');
+    }
+  })()
+</script>
+
+<div class='clearfix'></div>
+<a href='/enterprises?from=gea-user-A'>
+<div class='ent-poster user'>
+<div class='carousel slide' data-interval='5000' data-ride='carousel'>
+<div class='carousel-inner'>
+<div class='item'>
+<img src='https://gitee.com/index/ent_poster/banner_5_1_a.png'>
+</div>
+<div class='active item'>
+<img src='https://gitee.com/index/ent_poster/banner_5_2_a.png'>
+</div>
+<div class='item'>
+<img src='https://gitee.com/index/ent_poster/banner_5_3_a.png'>
+</div>
+</div>
+</div>
+</div>
+</a>
+
+</div>
+<div class='eleven wide column git-user-twl-col'>
+
+<div class='git-user-sidebar'>
+<div class='ui secondary pointing menu' id='git-user-sidebar-menu-zh-CN'>
+<a href="/pyinjava" class="item "><i class='iconfont icon-snippet'></i>
+概览
+</a><a href="/pyinjava/events" class="item "><i class='iconfont icon-activities'></i>
+动态
+</a><a href="/pyinjava/projects" class="item project active"><i class='iconfont icon-projects'></i>
+项目
+<span class='ui mini circular label'>
+10
+</span>
+</a><a href="/pyinjava/codes" class="item "><i class='iconfont icon-code'></i>
+代码片段
+</a></div>
+</div>
+
+<div class='git-profile-contents'>
+<div class='project-list'>
+<div class='git-profile-content-header'>
+<div class='ui top fluid text item git-dashboard-projects-menu'>
+<a href="/pyinjava/projects" class="item f-bold">所有</a>
+<a href="/pyinjava/projects?scope=personal" class="item ">个人的</a>
+<a href="/pyinjava/projects?scope=joined" class="item ">参与的</a>
+<a href="/pyinjava/projects?scope=forked" class="item ">Forks</a>
+<div class='ui top left pointing dropdown small gradient button link item git-profile-selection-dropdown'>
+<div class='text'>
+最近更新
+</div>
+<i class='icon dropdown'></i>
+<div class='menu'>
+<a href="/pyinjava/projects" class="item">最近更新</a>
+<a href="/pyinjava/projects?sort=created_at+desc" class="item">最新创建</a>
+<a href="/pyinjava/projects?sort=created_at" class="item">最早创建</a>
+<a href="/pyinjava/projects?sort=name" class="item">项目名称</a>
+</div>
+&nbsp;
+</div>
+<div class='git-user-serach-prj'>
+<div class='ui left small icon search input' id='search_project'>
+<div class='ui icon input'>
+<input class='prompt' id='search-projects' placeholder='快速搜索...' type='text'>
+<i class='iconfont icon-search icon'></i>
+</div>
+</div>
+</div>
+<script>
+  $('#search-projects').on('keydown', function(e) {
+    if(e.keyCode == 13) {
+      var searchContent = $(this).val()
+      $.ajax({
+        type: 'GET',
+        url: "/pyinjava/projects",
+        dataType: 'script',
+        beforeSend: function() {
+          $('#search_project').find('.ui.icon.input').addClass('loading')
+        },
+        complete: function() {
+          $('#search_project').find('.ui.icon.input').removeClass('loading')
+        },
+        data: {
+          search: searchContent
+        }
+      });
+    }
+  })
+</script>
+
+</div>
+</div>
+<div class='project-container'>
+<div class='git-tags'>
+
+</div>
+<ul class='git-profile-projects-ulist' id='search-projects-ulist'>
+<div class='project' data-path='pyinjava/jtuple'>
+<h4>
+<ul class='repo-stats float-right'>
+<li class='watch'>
+<a href="/pyinjava/jtuple/watchers"><i class='iconfont icon-watch'></i>
+</a><a href="/pyinjava/jtuple/watchers">13
+</a></li>
+<li class='star'>
+<a href="/pyinjava/jtuple/stargazers"><i class='iconfont icon-star'></i>
+</a><a href="/pyinjava/jtuple/stargazers">53
+</a></li>
+<li class='fork'>
+<a href="/pyinjava/jtuple/members"><i class='iconfont icon-fork'></i>
+</a><a href="/pyinjava/jtuple/members">10
+</a></li>
+</ul>
+<span class='pro-name'>
+<span class='pro-name'>
+<span class="project-title"><i class="project-icon iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/pyinjava" class="author" title="sd4324530">sd4324530</a> / <a href="/pyinjava/jtuple" class="repository" style="padding-bottom: 0px" target="_blank" title="JTuple">JTuple</a></span><span class="project-badges"><a href="/explore/recommend?lang=Java" class="ui small label" id="project-language" target="_blank" title="主要编程语言">Java</a></span>
+<i class='iconfont icon-recommended' title='码云推荐项目'></i>
+
+</span>
+</span>
+</h4>
+<p class='description'>
+java语言版本的`元组`数据类型，实现了元组类型的特性以及常用操作方法
+</p>
+<div class='user-tags' id='user-project-tags-1999386'>
+
+</div>
+<span class='create-time'>
+最近更新:
+<span>8个月前</span>
+<div class='desc float-right member-type'>
+</div>
+</span>
+</div>
+<div class='project' data-path='pyinjava/fastweixin'>
+<h4>
+<ul class='repo-stats float-right'>
+<li class='watch'>
+<a href="/pyinjava/fastweixin/watchers"><i class='iconfont icon-watch'></i>
+</a><a href="/pyinjava/fastweixin/watchers">697
+</a></li>
+<li class='star'>
+<a href="/pyinjava/fastweixin/stargazers"><i class='iconfont icon-star'></i>
+</a><a href="/pyinjava/fastweixin/stargazers">1543
+</a></li>
+<li class='fork'>
+<a href="/pyinjava/fastweixin/members"><i class='iconfont icon-fork'></i>
+</a><a href="/pyinjava/fastweixin/members">688
+</a></li>
+</ul>
+<span class='pro-name'>
+<span class='pro-name'>
+<span class="project-title"><i class="project-icon iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/pyinjava" class="author" title="sd4324530">sd4324530</a> / <a href="/pyinjava/fastweixin" class="repository" style="padding-bottom: 0px" target="_blank" title="fastweixin">fastweixin</a></span><span class="project-badges"><a href="/explore/recommend?lang=Java" class="ui small label" id="project-language" target="_blank" title="主要编程语言">Java</a></span>
+<a href="/gvp" class="ui small label git-project-gvp-badge gvp-label" target="_blank" title="GVP - 码云最有价值开源项目">GVP</a>
+<script>
+  (function() {
+    $('.gvp-label').popup({
+      position: 'right center'
+    });
+  
+  }).call(this);
+</script>
+
+</span>
+</span>
+</h4>
+<p class='description'>
+极其方便的实现微信公众平台服务端开发，2行代码完成服务器绑定，3行代码实现用户消息监听
+</p>
+<div class='user-tags' id='user-project-tags-206198'>
+
+</div>
+<span class='create-time'>
+最近更新:
+<span>12个月前</span>
+<div class='desc float-right member-type'>
+</div>
+</span>
+</div>
+<div class='project' data-path='pyinjava/fastexcel'>
+<h4>
+<ul class='repo-stats float-right'>
+<li class='watch'>
+<a href="/pyinjava/fastexcel/watchers"><i class='iconfont icon-watch'></i>
+</a><a href="/pyinjava/fastexcel/watchers">86
+</a></li>
+<li class='star'>
+<a href="/pyinjava/fastexcel/stargazers"><i class='iconfont icon-star'></i>
+</a><a href="/pyinjava/fastexcel/stargazers">175
+</a></li>
+<li class='fork'>
+<a href="/pyinjava/fastexcel/members"><i class='iconfont icon-fork'></i>
+</a><a href="/pyinjava/fastexcel/members">64
+</a></li>
+</ul>
+<span class='pro-name'>
+<span class='pro-name'>
+<span class="project-title"><i class="project-icon iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/pyinjava" class="author" title="sd4324530">sd4324530</a> / <a href="/pyinjava/fastexcel" class="repository" style="padding-bottom: 0px" target="_blank" title="fastexcel">fastexcel</a></span><span class="project-badges"><a href="/explore/recommend?lang=Java" class="ui small label" id="project-language" target="_blank" title="主要编程语言">Java</a></span>
+<i class='iconfont icon-recommended' title='码云推荐项目'></i>
+
+</span>
+</span>
+</h4>
+<p class='description'>
+快速简单读取excel数据
+</p>
+<div class='user-tags' id='user-project-tags-252872'>
+
+</div>
+<span class='create-time'>
+最近更新:
+<span>接近2年前</span>
+<div class='desc float-right member-type'>
+</div>
+</span>
+</div>
+<div class='project' data-path='pyinjava/webChat'>
+<h4>
+<ul class='repo-stats float-right'>
+<li class='watch'>
+<a href="/pyinjava/webChat/watchers"><i class='iconfont icon-watch'></i>
+</a><a href="/pyinjava/webChat/watchers">121
+</a></li>
+<li class='star'>
+<a href="/pyinjava/webChat/stargazers"><i class='iconfont icon-star'></i>
+</a><a href="/pyinjava/webChat/stargazers">174
+</a></li>
+<li class='fork'>
+<a href="/pyinjava/webChat/members"><i class='iconfont icon-fork'></i>
+</a><a href="/pyinjava/webChat/members">70
+</a></li>
+</ul>
+<span class='pro-name'>
+<span class='pro-name'>
+<span class="project-title"><i class="project-icon iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/pyinjava" class="author" title="sd4324530">sd4324530</a> / <a href="/pyinjava/webChat" class="repository" style="padding-bottom: 0px" target="_blank" title="webChat">webChat</a></span><span class="project-badges"><a href="/explore/recommend?lang=Java" class="ui small label" id="project-language" target="_blank" title="主要编程语言">Java</a></span>
+<i class='iconfont icon-recommended' title='码云推荐项目'></i>
+
+</span>
+</span>
+</h4>
+<p class='description'>
+使用websocket实现网页多人聊天
+</p>
+<div class='user-tags' id='user-project-tags-307768'>
+
+</div>
+<span class='create-time'>
+最近更新:
+<span>2年前</span>
+<div class='desc float-right member-type'>
+</div>
+</span>
+</div>
+<div class='project' data-path='pyinjava/fastlock'>
+<h4>
+<ul class='repo-stats float-right'>
+<li class='watch'>
+<a href="/pyinjava/fastlock/watchers"><i class='iconfont icon-watch'></i>
+</a><a href="/pyinjava/fastlock/watchers">11
+</a></li>
+<li class='star'>
+<a href="/pyinjava/fastlock/stargazers"><i class='iconfont icon-star'></i>
+</a><a href="/pyinjava/fastlock/stargazers">16
+</a></li>
+<li class='fork'>
+<a href="/pyinjava/fastlock/members"><i class='iconfont icon-fork'></i>
+</a><a href="/pyinjava/fastlock/members">4
+</a></li>
+</ul>
+<span class='pro-name'>
+<span class='pro-name'>
+<span class="project-title"><i class="project-icon iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/pyinjava" class="author" title="sd4324530">sd4324530</a> / <a href="/pyinjava/fastlock" class="repository" style="padding-bottom: 0px" target="_blank" title="fastlock">fastlock</a></span><span class="project-badges"><a href="/explore/recommend?lang=Java" class="ui small label" id="project-language" target="_blank" title="主要编程语言">Java</a></span>
+
+</span>
+</span>
+</h4>
+<p class='description'>
+基于jdk lock接口实现的分布式锁
+</p>
+<div class='user-tags' id='user-project-tags-1001291'>
+
+</div>
+<span class='create-time'>
+最近更新:
+<span>2年多前</span>
+<div class='desc float-right member-type'>
+</div>
+</span>
+</div>
+<div class='project' data-path='pyinjava/fastrpc'>
+<h4>
+<ul class='repo-stats float-right'>
+<li class='watch'>
+<a href="/pyinjava/fastrpc/watchers"><i class='iconfont icon-watch'></i>
+</a><a href="/pyinjava/fastrpc/watchers">29
+</a></li>
+<li class='star'>
+<a href="/pyinjava/fastrpc/stargazers"><i class='iconfont icon-star'></i>
+</a><a href="/pyinjava/fastrpc/stargazers">45
+</a></li>
+<li class='fork'>
+<a href="/pyinjava/fastrpc/members"><i class='iconfont icon-fork'></i>
+</a><a href="/pyinjava/fastrpc/members">17
+</a></li>
+</ul>
+<span class='pro-name'>
+<span class='pro-name'>
+<span class="project-title"><i class="project-icon iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/pyinjava" class="author" title="sd4324530">sd4324530</a> / <a href="/pyinjava/fastrpc" class="repository" style="padding-bottom: 0px" target="_blank" title="fastrpc">fastrpc</a></span><span class="project-badges"><a href="/explore/recommend?lang=Java" class="ui small label" id="project-language" target="_blank" title="主要编程语言">Java</a></span>
+<i class='iconfont icon-recommended' title='码云推荐项目'></i>
+
+</span>
+</span>
+</h4>
+<p class='description'>
+基于java AIO实现的RPC调用框架
+</p>
+<div class='user-tags' id='user-project-tags-750593'>
+
+</div>
+<span class='create-time'>
+最近更新:
+<span>2年多前</span>
+<div class='desc float-right member-type'>
+</div>
+</span>
+</div>
+<div class='project' data-path='pyinjava/ECharts'>
+<h4>
+<ul class='repo-stats float-right'>
+<li class='watch'>
+<a href="/pyinjava/ECharts/watchers"><i class='iconfont icon-watch'></i>
+</a><a href="/pyinjava/ECharts/watchers">3
+</a></li>
+<li class='star'>
+<a href="/pyinjava/ECharts/stargazers"><i class='iconfont icon-star'></i>
+</a><a href="/pyinjava/ECharts/stargazers">2
+</a></li>
+<li class='fork'>
+<a href="/free/ECharts/members"><i class='iconfont icon-fork'></i>
+</a><a href="/free/ECharts/members">615
+</a></li>
+</ul>
+<span class='pro-name'>
+<span class='main-pro-name'>
+<i class="project-icon iconfont icon-fork" title="这是一个公开的fork项目"></i> <a href="/pyinjava" class="author" title="sd4324530">sd4324530</a> / <a href="/pyinjava/ECharts" class="repository" style="padding-bottom: 0px" target="_blank" title="ECharts">ECharts</a>
+</span>
+<span class='fork-pro-name'>
+<span class='fork-flag'>
+forked from
+</span>
+<a href="/free" class="author" title="abel533">abel533</a> / <a href="/free/ECharts" class="repository" style="padding-bottom: 0px" target="_blank" title="ECharts">ECharts</a>
+</span>
+</span>
+</h4>
+<p class='description'>
+这是一个针对ECharts2.0版本的Java类库，实现了所有ECharts中的Json结构对应的Java对象，并且可以很方便的创建Option
+</p>
+<div class='user-tags' id='user-project-tags-677360'>
+
+</div>
+<span class='create-time'>
+最近更新:
+<span>接近3年前</span>
+<div class='desc float-right member-type'>
+</div>
+</span>
+</div>
+<div class='project' data-path='pyinjava/pond'>
+<h4>
+<ul class='repo-stats float-right'>
+<li class='watch'>
+<a href="/pyinjava/pond/watchers"><i class='iconfont icon-watch'></i>
+</a><a href="/pyinjava/pond/watchers">1
+</a></li>
+<li class='star'>
+<a href="/pyinjava/pond/stargazers"><i class='iconfont icon-star'></i>
+</a><a href="/pyinjava/pond/stargazers">0
+</a></li>
+<li class='fork'>
+<a href="/edwinyxc/pond/members"><i class='iconfont icon-fork'></i>
+</a><a href="/edwinyxc/pond/members">27
+</a></li>
+</ul>
+<span class='pro-name'>
+<span class='main-pro-name'>
+<i class="project-icon iconfont icon-fork" title="这是一个公开的fork项目"></i> <a href="/pyinjava" class="author" title="sd4324530">sd4324530</a> / <a href="/pyinjava/pond" class="repository" style="padding-bottom: 0px" target="_blank" title="pond">pond</a>
+</span>
+<span class='fork-pro-name'>
+<span class='fork-flag'>
+forked from
+</span>
+<a href="/edwinyxc" class="author" title="不行就再写一个">不行就再写一个</a> / <a href="/edwinyxc/pond" class="repository" style="padding-bottom: 0px" target="_blank" title="pond">pond</a>
+</span>
+</span>
+</h4>
+<p class='description'>
+胖的，其实不胖 —— Pond - 灵活，快速的web开发框架 （基于java 8)
+</p>
+<div class='user-tags' id='user-project-tags-468229'>
+
+</div>
+<span class='create-time'>
+最近更新:
+<span>3年多前</span>
+<div class='desc float-right member-type'>
+</div>
+</span>
+</div>
+<div class='project' data-path='pyinjava/firePusher'>
+<h4>
+<ul class='repo-stats float-right'>
+<li class='watch'>
+<a href="/pyinjava/firePusher/watchers"><i class='iconfont icon-watch'></i>
+</a><a href="/pyinjava/firePusher/watchers">12
+</a></li>
+<li class='star'>
+<a href="/pyinjava/firePusher/stargazers"><i class='iconfont icon-star'></i>
+</a><a href="/pyinjava/firePusher/stargazers">20
+</a></li>
+<li class='fork'>
+<a href="/pyinjava/firePusher/members"><i class='iconfont icon-fork'></i>
+</a><a href="/pyinjava/firePusher/members">10
+</a></li>
+</ul>
+<span class='pro-name'>
+<span class='pro-name'>
+<span class="project-title"><i class="project-icon iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/pyinjava" class="author" title="sd4324530">sd4324530</a> / <a href="/pyinjava/firePusher" class="repository" style="padding-bottom: 0px" target="_blank" title="firePusher">firePusher</a></span><span class="project-badges"><a href="/explore/recommend?lang=Java" class="ui small label" id="project-language" target="_blank" title="主要编程语言">Java</a></span>
+<i class='iconfont icon-recommended' title='码云推荐项目'></i>
+
+</span>
+</span>
+</h4>
+<p class='description'>
+对smack和javapns进行简单的封装，做到更加方便的向各种设备进行消息推送
+</p>
+<div class='user-tags' id='user-project-tags-319158'>
+
+</div>
+<span class='create-time'>
+最近更新:
+<span>3年多前</span>
+<div class='desc float-right member-type'>
+</div>
+</span>
+</div>
+<div class='project' data-path='pyinjava/teb'>
+<h4>
+<ul class='repo-stats float-right'>
+<li class='watch'>
+<a href="/pyinjava/teb/watchers"><i class='iconfont icon-watch'></i>
+</a><a href="/pyinjava/teb/watchers">1
+</a></li>
+<li class='star'>
+<a href="/pyinjava/teb/stargazers"><i class='iconfont icon-star'></i>
+</a><a href="/pyinjava/teb/stargazers">0
+</a></li>
+<li class='fork'>
+<a href="/kiang/teb/members"><i class='iconfont icon-fork'></i>
+</a><a href="/kiang/teb/members">22
+</a></li>
+</ul>
+<span class='pro-name'>
+<span class='main-pro-name'>
+<i class="project-icon iconfont icon-fork" title="这是一个公开的fork项目"></i> <a href="/pyinjava" class="author" title="sd4324530">sd4324530</a> / <a href="/pyinjava/teb" class="repository" style="padding-bottom: 0px" target="_blank" title="teb">teb</a>
+</span>
+<span class='fork-pro-name'>
+<span class='fork-flag'>
+forked from
+</span>
+<a href="/yinjun622" class="author" title="小鲅鱼">小鲅鱼</a> / <a href="/yinjun622/teb" class="repository" style="padding-bottom: 0px" target="_blank" title="teb">teb</a>
+</span>
+</span>
+</h4>
+<p class='description'>
+模板引擎测试工具
+</p>
+<div class='user-tags' id='user-project-tags-645423'>
+
+</div>
+<span class='create-time'>
+最近更新:
+<span>4年前</span>
+<div class='desc float-right member-type'>
+</div>
+</span>
+</div>
+
+</ul>
+</div>
+</div>
+</div>
+<footer class='ui grid page'>
+<div class='column center aligned' id='projects-paginate'>
+
+</div>
+</footer>
+<script>
+  var quitProjectModal = new GiteeModalHelper({
+    cancelText: '取消',
+    approveText: '确定'
+  })
+  
+  $('.git-profile-contents .project-list').on('click', '.quit-project', function() {
+    var $this   = $(this),
+        title   = '退出项目'
+        content = '确定退出 ' + $this.data('name') + ' 吗？'
+  
+    quitProjectModal.confirm(title, content, function() {
+      $this.find('i').replaceWith('<i class="spinner loading icon"></i>')
+      $.ajax({
+        url: $this.attr('href'),
+        type: 'DELETE',
+        dataType: 'script'
+      })
+    })
+    return false
+  })
+</script>
+
+</div>
+</div>
+</div>
+<footer id='git-footer-main'>
+<div class='ui container'>
+<div class='ui two column grid'>
+<div class='column'>
+<p><a href="https://gitee.com/" target="_blank">© Gitee.com  </a></p>
+<div class='ui three column grid' id='footer-left'>
+<div class='column'>
+<div class='ui link list'>
+<div class='item'>
+<a href="/about_us" class="item">关于我们</a>
+</div>
+<div class='item'>
+<a href="/terms" class="item">使用条款</a>
+</div>
+<div class='item'>
+<a href="/oschina/git-osc/issues" class="item">意见建议</a>
+</div>
+<div class='item'>
+<a href="/links.html" class="item">合作伙伴</a>
+</div>
+</div>
+</div>
+<div class='column'>
+<div class='ui link list'>
+<div class='item'>
+<a href="/api/v5/swagger" class="item">OpenAPI</a>
+</div>
+<div class='item'>
+<a href="/all-about-git" class="item">Git 大全</a>
+</div>
+<div class='item'>
+<a href="https://copycat.gitee.com/" class="item">代码克隆检测</a>
+</div>
+<div class='item'>
+<a href="/appclient" class="item">APP与插件下载</a>
+</div>
+</div>
+</div>
+<div class='column'>
+<div class='ui link list'>
+<div class='item'>
+<a href="https://gitee.com/help" class="item">帮助文档</a>
+</div>
+<div class='item'>
+<a href="https://gitee.com/git-osc/" class="item">更新日志</a>
+</div>
+<div class='item'>
+<a href="/gists" class="item">代码片段</a>
+</div>
+<div class='item'>
+<a href="/gitee-stars" class="item">码云封面人物</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='column right aligned followus'>
+<div class='qrcode weixin'>
+<img alt="Qrcode-weixin" src="/assets/qrcode-weixin-8ab7378f5545710bdb3ad5c9d17fedfe.jpg" />
+<p class='weixin-text'>微信服务号</p>
+</div>
+<div class='phone-and-qq column'>
+<div class='ui list official-support-container'>
+<div class='item'>
+<a href="//shang.qq.com/wpa/qunwpa?idkey=0d6c2fc0b5b71ac33405dd575bb490bf1a50e3c9a9f694e8a689cb59ee7dacc3" class="icon-popup" title="点击加入码云官方三群"><i class='iconfont icon-logo-qq'></i>
+<span>
+官方技术支持QQ群：655903986
+</span>
+</a></div>
+<div class='item mail-and-zhihu'>
+<a href="mailto: git@oschina.cn"><i class='iconfont icon-ic-mail'></i>
+<span id='git-footer-email'>
+git#oschina.cn
+</span>
+</a><a href="https://www.zhihu.com/org/ma-yun-osc/ " target="_blank"><i class='iconfont icon-zhihu'></i>
+<span>
+码云Gitee
+</span>
+</a></div>
+<div class='item'>
+企业版售前及售后使用咨询：400-606-0201
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='bottombar'>
+<div class='ui container'>
+<div class='ui grid'>
+<div class='five wide column partner'>
+本站带宽由 <a href="https://www.anchnet.com/" target="_blank" title="anchnet"><img alt="51idc" src="/51idc.png" /></a> 提供
+</div>
+<div class='eleven wide column right aligned'>
+<div class='copyright'>
+<a href="http://www.miitbeian.gov.cn/">粤ICP备12009483号-8</a>
+深圳市奥思网络科技有限公司版权所有
+</div>
+<i class='icon world'></i>
+<a href="/language/zh-CN">简 体
+</a>/
+<a href="/language/zh-TW">繁 體
+</a>/
+<a href="/language/en">English
+</a></div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  Gitee.initFooter()
+  $('#git-footer-main .icon-popup').popup({ position: 'bottom center' })
+</script>
+
+
+<div class='side-toolbar'>
+<div class='button toolbar-help'>
+<i class='iconfont icon-help'></i>
+</div>
+<div class='toolbar-help-dialog'>
+<div class='toolbar-dialog-header'>
+<h3 class='toolbar-dialog-title'>搜索帮助</h3>
+<form accept-charset="UTF-8" action="/help/load_keywords_data" class="toolbar-help-search-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+<div class='ui icon input fluid toolbar-help-search'>
+<input name='keywords' placeholder='请输入产品名称或问题' type='text'>
+<i class='icon search'></i>
+</div>
+</form>
+
+<i class='iconfont icon-close toolbar-dialog-close-icon'></i>
+</div>
+<div class='toolbar-dialog-content'>
+<div class='toolbar-help-hot-search'>
+<div class='toolbar-list'>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4104">Git 是什么</a>
+</div>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4114">Git 仓库的基本操作</a>
+</div>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4166">企业版和个人版功能对比</a>
+</div>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4167">企业版和个人版服务对比</a>
+</div>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4194">如何处理代码冲突</a>
+</div>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4202">在小程序Web开发工具中使用Git做版本管理</a>
+</div>
+</div>
+</div>
+<div class='toolbar-help-search-reseult'>
+<div class='toolbar-help-flex-column'>
+<div class='ui centered inline loader toolbar-help-loader'></div>
+<div class='toolbar-list'></div>
+<div class='toolbar-help-link-to-help'>
+<a href="" target="_blank">查看更多搜索结果</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='button share-link'>
+<i class='iconfont icon-share'></i>
+</div>
+<div class='ui popup'>
+<div class='header'>
+分享到
+</div>
+<div class='bdsharebuttonbox'>
+<a class='item bds_weixin' data-cmd='weixin' title='分享到微信'>weixin</a>
+<a class='item bds_tsina' data-cmd='tsina' title='分享到新浪微博'>sina</a>
+<a class='item bds_sqq' data-cmd='sqq' title='分享到QQ好友'>qq</a>
+<a class='item bds_qzone' data-cmd='qzone' title='分享到QQ空间'>qzone</a>
+</div>
+</div>
+<div class='button gotop popup' data-content='回到顶部' id='gotop'>
+<i class='iconfont icon-top'></i>
+</div>
+</div>
+<script>
+  Gitee.initSideToolbar({})
+</script>
+<script>
+  window._bd_share_config = {
+    "common": {
+      "bdSnsKey": {},
+      "bdText": document.title,
+      "bdMini": "1",
+      "bdMiniList": ["bdxc","tqf","douban","bdhome","sqq","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","fbook","twi","linkedin","h163","evernotecn","copy","print"],
+      "bdPic": "",
+      "bdStyle": "1",
+      "bdSize": "32"
+    },
+    "share": {}
+  }
+</script>
+<script src="/bd_share/static/api/js/share.js" type="text/javascript"></script>
+
+
+<style>
+  .float-left-box{display:none;position:fixed;left:0;bottom:0;z-index:99}.float-left-box .close-left{position:absolute;top:20px;left:25px;cursor:pointer}.float-left-box .float-people{width:170px;padding:10px}
+</style>
+<div class='float-left-box'>
+<a href='/gitee-stars/12' target='_blank'>
+<img alt="12_float_left_people" class="float-people" src="/assets/gitee_stars/12_float_left_people-c59aee86c0ba52d3b58fff9f73f16929.png" />
+<img alt="12_float_left_close" class="close-left" src="/assets/gitee_stars/12_float_left_close-983603b0c61d3148acff0a5e1efb3646.png" />
+</a>
+</div>
+<script>
+  var giteeStarsWidget = $('.float-left-box')
+  if ($.cookie('visit-gitee-12') == 1) {
+    giteeStarsWidget.hide()
+  } else {
+    giteeStarsWidget.show()
+  }
+  $('.close-left').on('click', function(e) {
+    e.preventDefault()
+    $.cookie('visit-gitee-12', 1, { path: '/', expires: 30})
+    giteeStarsWidget.hide()
+  })
+</script>
+
+</body>
+</html>
+<script>
+  function closeWallet(self) {
+    $.post("/profile/set_wallet_guide")
+    $(self).parent().remove()
+    new GiteeModalHelper({
+      okText: '我知道了'
+    }).alert('提示', '你已关闭”码云金库“在个人主页的入口，之后你可在 <b>个人设置 -> 我的金库</b> 重新进入')
+  }
+</script>

@@ -44,6 +44,7 @@ class Store(object):
     def store(self):
         with open(self.path, "a") as fp:
             json.dump(self._buf, fp)
+            json.load()
         
         self._buf.clear()
         # clear buffer

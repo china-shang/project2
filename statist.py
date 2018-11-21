@@ -12,20 +12,25 @@ class Statist(object):
         
         self.repos_from_fail = 0
         self.user_from_fail = 0
+        self.req_from_fail = 0
         self.fail_cnt = 0
         self.max_fail_interval = 0
         self.min_fail_interval = 0
+        self._sleep_time = 0
         
         self.req_count = 0
     
     def increase_repos(self, num=1):
         self.all_repo += num
+        self.repos_from_fail += num
     
     def increase_user(self, num=1):
         self.all_user += num
+        self.user_from_fail += num
     
     def increase_req(self, num=1):
         self.req_count += num
+        self.req_from_fail += num
     
     def get_avg_speed(self):
         now = time.time()
@@ -33,12 +38,12 @@ class Statist(object):
         result = (self.all_repo / cost, self.all_user / cost, self.req_count / cost)
         return result
     
-    def get_recent_speed(self, sleep_during=0):
+    def get_recent_speed(self, sleep_during=90):
         if self.last_fail_time == 0:
             return self.get_avg_speed()
         
         now = time.time()
-        cost = now - self.last_fail_time - sleep_during
+        cost = now - (self.last_fail_time + self._sleep_time)
         result = (self.repos_from_fail / cost, self.user_from_fail / cost, self.req_count / cost)
         return result
     
@@ -47,11 +52,16 @@ class Statist(object):
         cost = now - self.start_time
         return cost
     
-    def record_error(self):
+    def record_error(self, sleep_time=0):
+        self._sleep_time = sleep_time
         now = time.time()
         interval = now - self.last_fail_time
         self.max_fail_interval = max(interval, self.max_fail_interval)
         self.min_fail_interval = min(interval, self.min_fail_interval)
+        
+        self.repos_from_fail = 0
+        self.user_from_fail = 0
+        self.req_from_fail = 0
         
         self.fail_cnt += 1
         self.last_fail_time = now

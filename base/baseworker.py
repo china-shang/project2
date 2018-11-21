@@ -6,8 +6,9 @@ from .baselooper import BaseLooper
 
 
 class BaseWorker(BaseLooper):
-    def __init__(self, taskspool, store, statist):
+    def __init__(self, taskspool, store, statist,name=""):
         super().__init__()
+        self._name=name
         self._running = True
         self._task_pool = taskspool
         self._store = store
@@ -18,7 +19,9 @@ class BaseWorker(BaseLooper):
         start worker
         """
         await super().start()
-        await self._task_pool.start()
+        if not self._task_pool.get_status():
+            await self._task_pool.start()
+        
         asyncio.ensure_future(self.run())
     
     async def stop(self):
@@ -57,3 +60,12 @@ class BaseWorker(BaseLooper):
     
     async def _handle_more(self):
         pass
+    
+    def __hash__(self):
+        return hash(self._name)
+    
+    def __eq__(self, other):
+        if issubclass(other,BaseWorker):
+            return self._name==other._name
+        return False
+    

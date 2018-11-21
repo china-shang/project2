@@ -16,14 +16,19 @@ class A(object):
         return 1
     
     async def test(self):
-        app = web.Application()
-        site = web.TCPSite()
-        await site.start()
-        loop = asyncio.get_event_loop()
-        srv = await  loop.create_server()
+        if 3:
+            a=3
+        else:
+            a=4
+        async def t1():
+            if a:
+                a=3
+        await t1()
+    
 
 
 s = {A(), A()}
 print(len(s))
 import sys
+asyncio.get_event_loop().run_until_complete(A().test())
 print(sys.path)

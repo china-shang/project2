@@ -2,7 +2,7 @@ import os
 import sys
 
 from aiohttp import ClientSession
-from statistic import Statist
+from statist import Statist
 
 sys.path.insert(0,os.path.join(os.path.dirname(__name__),"../"))
 sys.path.insert(0,os.path.join(os.path.dirname(__name__),"../base"))

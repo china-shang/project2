@@ -12,8 +12,8 @@ class Type(object):
 class Chain(object):
     def __init__(self, name):
         self._path = f'{{ {name}}}'
-        self._no_add = False
-        self._start = self._path.index("}")
+        self._no_add = False # has add {},so not add
+        self._start = self._path.index("}")#next insert point
 
     def __getattr__(self, path):
         if(self._no_add):
@@ -27,12 +27,14 @@ class Chain(object):
             self._start += len(t)
         else:
             self._path.index("}", self._start)
+            #now add {} ,so next insert point is before new {} 's }
 
         self._no_add = False
         return self
 
     def _insert_chain(self, chain):
         t = chain.str_without_bracket()
+        # as subchain,it does not require the outermost {}
         return t
 
     def get(self, *args):
@@ -111,6 +113,7 @@ class Chain(object):
         return(self._path)
 
     def to_dict(self):
+        # print(self._path)
         return {"query":self._path}
 
     def str(self):

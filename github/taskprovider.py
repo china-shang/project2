@@ -9,9 +9,9 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__name__), "../"))
 sys.path.insert(0, os.path.join(os.path.dirname(__name__), "../base"))
 
-from gitee.mysqlclient import MysqlClient
+from github.mysqlclient import MysqlClient
 from base.basetaskprovider import BaseTaskProvider
-from gitee.task import Task
+from github.task import Task
 from base.basetaskprovider import *
 
 
@@ -22,7 +22,7 @@ class TaskProvider(BaseTaskProvider):
     
     def __init__(self,client=MysqlClient()):
         super().__init__(client=client)
-
+        #
         self._call_back: Dict[EventType, Coroutine] = {
             EventType.GETREPO: self._get_repo,
             EventType.GETUSER: self._get_user,
@@ -39,19 +39,26 @@ class TaskProvider(BaseTaskProvider):
     async def stop(self):
         await super().stop()
         await self._client.close()
-
+    
+    def _get_task(self,more=False):
+        if more:
+            name,is_org=self._get_buf_user.pop()
+            task=Task(name=name,is_org=is_org,more=more)
+        else:
+            name,is_org=self._get_buf_repos.pop()
+            task=Task(name=name,is_org=is_org,more=more)
+        return task
+        
     async def _get_repo(self):
         repos=await self._client.get()
         self._get_buf_repos.update(repos)
-        logger.info(f"now _get_buf_repos has {len(self._get_buf_repos)}")
     
     async def _get_user(self):
         users=await self._client.get(users=True)
         self._get_buf_user.update(users)
-        logger.info(f"now _get_buf_user has {len(self._get_buf_user)}")
 
     async def _put(self):
-        await self._client.put({i['name'] for i in self._put_buf})
+        await self._client.put({i.to_tuple() for i in self._put_buf})
 
     async def _complete(self):
         s={(i.name,i.is_more) for i in self._complete_buf}
@@ -60,16 +67,6 @@ class TaskProvider(BaseTaskProvider):
     async def _fail(self):
         s={(i.name,i.is_more) for i in self._fail_buf}
         await self._client.fail(s)
-
-    def _get_task(self, more=False):
-        if more:
-            name = self._get_buf_user.pop()
-            res = BaseTask(name=name, is_more=more)
-        else:
-            name = self._get_buf_repos.pop()
-            res = BaseTask(name=name, is_more=more)
-    
-        return res
     
     
 async def test():
@@ -77,10 +74,7 @@ async def test():
     await tp.start()
     await tp.put(Task("jsddff"))
     u=await tp.get()
-    print(tp.import_buf(tp.export_buf()))
-    u=await tp.get()
-    print(tp.export_buf())
-    
+    print(u)
 
 if __name__ == '__main__':
     loop=asyncio.get_event_loop()

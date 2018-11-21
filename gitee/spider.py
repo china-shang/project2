@@ -35,10 +35,19 @@ class Spider(BaseSpider):
                                     timeout=self._timeout)
         
         self.name=user
-        if project:
-            return await self.fetch_project()
-        else:
-            return await self.fetch_users()
+        try:
+            if project:
+                return await self.fetch_project()
+            else:
+                return await self.fetch_users()
+        except aiohttp.ClientError as e:
+            e.args[0]
+            logger.error(f"client error {e}")
+            raise e
+        except Exception as e:
+            logger.error(f"exception e")
+            raise e
+            
     
     async def fetch_project(self):
         #TODO use ajax request

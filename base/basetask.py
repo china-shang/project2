@@ -2,15 +2,16 @@
 # -*- coding: utf-8 -*-
 
 class BaseTask(dict):
-    delagation={"name"}
+    delagation={"name",'is_more'}
 
     def __init__(self, name,is_more=False):
         super().__init__()
         self['name']=name
-        self.is_more=is_more
+        self['is_more']=is_more
 
     def __getattribute__(self, name):
-        if name in BaseTask.delagation:
+        delaga=type(self).__dict__['delagation']
+        if name in delaga:
             return super().__getitem__(name)
         else:
             return super().__getattribute__(name)
@@ -30,4 +31,7 @@ class BaseTask(dict):
 
     def __hash__(self):
         return hash(self.name)
+    
+    def __str__(self):
+        return self['name']
 

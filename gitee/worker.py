@@ -12,7 +12,7 @@ from gitee.spider import Spider
 from gitee.taskproviderproxy import BaseTaskProviderProxy
 from gitee.task import Task
 from gitee.repos import Repos
-from statistic import Statist
+from statist import Statist
 from datastore import Store
 
 from logger import get_logger
@@ -26,9 +26,10 @@ if __name__ == "__main__":
 # noinspection PyTypeChecker,PyBroadException
 class Worker(BaseWorker):
     def __init__(self, taskspool: BaseTaskProviderProxy,
-                 store: Store, statist: Statist):
-        super().__init__(taskspool, store, statist)
+                 store: Store, statist: Statist,name=""):
+        super().__init__(taskspool, store, statist,name=name)
         
+        self._name=name
         self._task_pool = taskspool
         self._store = store
         self._statist = statist
@@ -39,26 +40,36 @@ class Worker(BaseWorker):
         while self._running:
             self._task = await self.get_task()
             logger.info(f"get tasks:{self._task}")
-            await self.handle()
-            await self._task_pool.complete(self._task)
-            logger.info(f"complete {self._task}")
-    
+            try:
+                await self.handle()
+                await self._task_pool.complete(self._task)
+                logger.info(f"complete {self._task}")
+            except Exception as e:
+                logger.error(f"task {self._task.name} error ,mark fail")
+                await self._task_pool.fail(self._task)
     async def get_task(self):
         task = await self._task_pool.get()
         if task:
+            logger.info(f"get repos task {task.name}")
             return task
         else:
             task = await self._task_pool.get(more=True)
-            logger.info(f"get users task")
             if task:
+                logger.info(f"get users task {task['name']}")
                 return task
             else:
                 # maybe no task
+                logger.warning(f"maybe no task")
+                
                 return None
         return task
     
     async def handle(self):
+        if not self._task:
+            logger.warning("no task")
+            await asyncio.sleep(5)
         if self._task.is_more:
+            logger.info("handle users task")
             await self._handle_more()
         else:
             await self._handle()
@@ -76,6 +87,7 @@ class Worker(BaseWorker):
         for i in users:
             await self._task_pool.put(Task(i))
         self._statist.increase_user(len(users))
+        logger.info(f"get {len(users)} users from {self._task.name}")
     
     def extract_repos(self, repos: List[Soup]):
         if not repos or len(repos) == 0:

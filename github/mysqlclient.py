@@ -3,6 +3,7 @@ import sys
 
 #TODO implement github users mysqlclient
 sys.path.insert(0, os.path.join(os.path.dirname(__name__), "../"))
+sys.path.insert(0, os.path.join(os.path.dirname(__name__), "../"))
 sys.path.insert(0, os.path.join(os.path.dirname(__name__), "../base"))
 
 import aiomysql
@@ -10,7 +11,12 @@ import asyncio
 from typing import *
 from config import Config
 from base.basemysqlclient import BaseMysqlClient
+from logger import get_logger
+logger = get_logger(__name__)
 
+
+
+#put get check method add "is_org"
 
 
 class MysqlClient(BaseMysqlClient):
@@ -18,8 +24,9 @@ class MysqlClient(BaseMysqlClient):
     communication with mysql server and provide api for upper layer
     """
     create_body = """
-   CREATE TABLE IF NOT EXISTS `gitee` (
+   CREATE TABLE IF NOT EXISTS `github` (
   `name` VARCHAR(100) NOT NULL,
+  `is_org` BOOL DEFAULT FALSE,
   `repos_done` BOOL DEFAULT FALSE,
   `repos_doing` BOOL DEFAULT FALSE,
   `users_done` BOOL DEFAULT FALSE  ,
@@ -37,30 +44,30 @@ class MysqlClient(BaseMysqlClient):
     );
     """
     
-    sel_body = f"select name from gitee where repos_doing!=True and repos_done!=True LIMIT 10;"
-    users_sel_body = f"select name from gitee where users_doing!=True and users_done!=True LIMIT 10;"
-    update_body = '''update gitee set repos_doing_time=current_timestamp(),repos_doing=True
+    sel_body = f"select name,is_org from github where repos_doing!=True and repos_done!=True LIMIT 10;"
+    users_sel_body = f"select name,is_org from github where users_doing!=True and users_done!=True LIMIT 10;"
+    update_body = '''update github set repos_doing_time=current_timestamp(),repos_doing=True
          where name in {};
         '''
-    users_update_body = '''update gitee set users_doing_time=current_timestamp(),users_doing=True
+    users_update_body = '''update github set users_doing_time=current_timestamp(),users_doing=True
          where name in {};
         '''
-    fail_body = '''update gitee set repos_doing=False
+    fail_body = '''update github set repos_doing=False
          where name in {};
         '''
-    users_fail_body = '''update gitee set users_doing=False
+    users_fail_body = '''update github set users_doing=False
          where name in {};
         '''
-    complete_body = '''update gitee set repos_done_time=current_timestamp(),repos_done=True
+    complete_body = '''update github set repos_done_time=current_timestamp(),repos_done=True
          where name in {};
         '''
-    users_complete_body = '''update gitee set users_done_time=current_timestamp(),users_done=True
+    users_complete_body = '''update github set users_done_time=current_timestamp(),users_done=True
          where name in {};
         '''
-    check_body = 'SELECT name FROM gitee where `name` in {};'
+    check_body = 'SELECT name,is_org FROM github where `name` in {};'
     
     def __init__(self, addr="localhost", port=3306,
-                 config=Config.mysql_config(), autocommit=True):
+                 config=Config.init_mysql_config(), autocommit=True):
         """
         
         :param addr:
@@ -111,12 +118,14 @@ class MysqlClient(BaseMysqlClient):
                     cur: aiomysql.Cursor
                     await cur.execute(self.sel_body)
                     res = await cur.fetchall()
-                    result = {i[0] for i in res}
+                    result = {(i[0],i[1]) for i in res}
+                    names = {i[0] for i in res}
                     if len(result) > 0:
                         await cur.execute(
-                            self.update_body.format(self.tostr(result)))
+                            self.update_body.format(self.tostr(names)))
                 # con.commit()
-        print(f"result={result}")
+        logger.info(f"result={result}")
+        
                 
         return result
     
@@ -127,10 +136,11 @@ class MysqlClient(BaseMysqlClient):
                 cur: aiomysql.Cursor
                 await cur.execute(self.users_sel_body)
                 res = await cur.fetchall()
-                result = {i[0] for i in res}
+                result = {(i[0],i[1]) for i in res}
+                names = {i[0] for i in res}
                 if len(result) > 0:
                     await cur.execute(
-                        self.users_update_body.format(self.tostr(result)))
+                        self.users_update_body.format(self.tostr(names)))
                 return result
     
     async def put(self, data: set):
@@ -144,24 +154,27 @@ class MysqlClient(BaseMysqlClient):
         
         values = ""
         for u in data:
-            values = f"{values}('{u}'),"
+            values = f"{values}('{u[0]}',{u[1]}),"
         values = values[:-1]
         
-        body = f"INSERT INTO gitee (`name`) VALUES {values};"
+        body = f"INSERT INTO github (`name`,`is_org`) VALUES {values};"
         # print(f"put body={body}")
         
         async with self._pool.acquire() as con:
             async with con.cursor() as cur:
                 await cur.execute(body)
+        
+        logger.info(f"put {data}")
     
     async def _check_exist(self, data: set):
         if not data or len(data) < 0:
             return set()
         async with self._pool.acquire() as con:
             async with con.cursor() as cur:
-                await cur.execute(self.check_body.format(self.tostr(data)))
+                names={i[0] for i in data}
+                await cur.execute(self.check_body.format(self.tostr(names)))
                 res = await cur.fetchall()
-                return {i[0] for i in res}
+                return {(i[0],i[1]) for i in res}
     
     async def complete(self, data: Set[Tuple[str,bool]]):
         data1={i for i in data if i[1]}
@@ -179,6 +192,7 @@ class MysqlClient(BaseMysqlClient):
             async with con.cursor() as cur:
                 await cur.execute(
                     self.complete_body.format(self.tostr(data)))
+        logger.info(f"complete {data}")
                 
     async def complete_users(self,data: Set[Tuple[str,bool]]):
         if not data or len(data) < 0:
@@ -188,6 +202,7 @@ class MysqlClient(BaseMysqlClient):
             async with con.cursor() as cur:
                 await cur.execute(
                     self.users_complete_body.format(self.tostr(data)))
+        logger.info(f"complete {data}")
 
     async def fail(self, data: Set[Tuple[str,bool]]):
         data1={i for i in data if i[1]}
@@ -205,6 +220,7 @@ class MysqlClient(BaseMysqlClient):
             async with con.cursor() as cur:
                 await cur.execute(
                     self.fail_body.format(self.tostr(data)))
+        logger.info(f"fail {data}")
 
     async def fail_users(self,data: Set[Tuple[str,bool]]):
         if not data or len(data) < 0:
@@ -214,7 +230,8 @@ class MysqlClient(BaseMysqlClient):
             async with con.cursor() as cur:
                 await cur.execute(
                     self.users_fail_body.format(self.tostr(data)))
-                
+        logger.info(f"fail {data}")
+        
     async def close(self):
         await self._pool.close()
     
@@ -223,17 +240,17 @@ class MysqlClient(BaseMysqlClient):
             async with con.cursor() as cur:
                 await cur.execute(self.create_body)
                 res = await cur.fetchall()
-                print(f"res={res}")
+                logger.info(f"res={res}")
 
 
 async def test():
-    client = BaseMysqlClient(autocommit=True)
+    client = MysqlClient(autocommit=True)
     await client.connection()
     # await client.create_table()
-    await client.put({"s324", "df", "sdji", "sdjf"})
+    await client.put({("s324",True), ("df",False)})
     result = await client.get()
     print(result)
-    await client.complete(result)
+    await client.complete({(result.pop()[0],False)})
 
 
 if __name__ == '__main__':

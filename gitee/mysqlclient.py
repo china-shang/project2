@@ -59,7 +59,7 @@ class MysqlClient(BaseMysqlClient):
     check_body = 'SELECT name FROM gitee where `name` in {};'
     
     def __init__(self, addr="localhost", port=3306,
-                 config=Config.mysql_config(), autocommit=True):
+                 config=Config.init_mysql_config(), autocommit=True):
         """
         
         :param addr:

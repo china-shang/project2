@@ -58,7 +58,7 @@ class BaseMysqlClient(object):
     check_body = 'SELECT name FROM gitee where `name` in {};'
     
     def __init__(self, addr="localhost", port=3306,
-                 config=Config.mysql_config(), autocommit=False):
+                 config=Config.init_mysql_config(), autocommit=False):
         """
         
         :param addr:
@@ -226,7 +226,9 @@ class BaseMysqlClient(object):
                 await cur.execute(self.create_body)
                 res = await cur.fetchall()
                 print(f"res={res}")
-
+                
+    async def remain(self):
+        pass
 
 async def test():
     client = BaseMysqlClient(autocommit=True)

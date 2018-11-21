@@ -8,7 +8,10 @@ __all__ = ["BaseLooper"]
 
 class BaseLooper(object):
     def __init__(self):
-        self._running = True
+        self._running = False
+        
+    def get_status(self):
+        return self._running
     
     async def start(self):
         """start server"""

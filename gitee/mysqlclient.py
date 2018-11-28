@@ -9,6 +9,10 @@ import asyncio
 from typing import *
 from config import Config
 from base.basemysqlclient import BaseMysqlClient
+from logger import get_logger
+logger = get_logger(__name__)
+
+
 
 
 
@@ -57,7 +61,8 @@ class MysqlClient(BaseMysqlClient):
          where name in {};
         '''
     check_body = 'SELECT name FROM gitee where `name` in {};'
-    
+
+    mark_fail_body=' update gitee set users_doing=0,repos_doing=0 where users_doing=1 or repos_doing=1;'
     def __init__(self, addr="localhost", port=3306,
                  config=Config.init_mysql_config(), autocommit=True):
         """
@@ -83,6 +88,10 @@ class MysqlClient(BaseMysqlClient):
             **self._config,
             autocommit=self._autocommit,
         )
+        async with self._pool.acquire() as con:
+            async with con.cursor() as cur:
+                await cur.execute(self.mark_fail_body)
+                logger.info(f"has mark fail")
     
     @staticmethod
     def tostr(data: tuple)->str:

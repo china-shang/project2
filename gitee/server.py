@@ -7,6 +7,7 @@ from base.basetask import BaseTask
 from gitee.taskprovider import TaskProvider
 from logger import get_logger
 from protocol import Protocol
+from config import Config
 
 logger = get_logger(__name__)
 
@@ -157,7 +158,9 @@ async def start(args=[("localhost",8889)]):
     
 def run(host="localhost",port=8888):
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(start(host=host,port=port))
+    node=Config.nodesconfig['gitee']
+    loop.run_until_complete(start(args=node))
+    #loop.run_until_complete(start(host=host,port=port))
 
 
 if __name__ == "__main__":

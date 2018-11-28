@@ -9,12 +9,13 @@ from gitee.client import Client
 from statist import Statist
 from datastore import Store
 from base.protocol import Protocol as Pro
+from config import Config
 
 logger = get_logger(__name__)
 
 
 class WorkerPool(BaseWorkerPool):
-    def __init__(self, statist: Statist = Statist(), max_size=50,host="localhost",port=8888):
+    def __init__(self, statist: Statist = Statist(), max_size=10,host="localhost",port=8888):
         super().__init__(statist, max_size)
         self._clt=Client(host=host,port=port)
         self._task_pool=BaseTaskProviderProxy(client=self._clt,name="nobug")
@@ -85,7 +86,8 @@ async def test(host="localhost",port=8888):
     
 def run(host="localhost",port=8888):
     loop=asyncio.get_event_loop()
-    loop.run_until_complete(test(host=host,port=port))
+    config=Config.nodeconfig['gitee']
+    loop.run_until_complete(test(**config))
     
 
 if __name__ == '__main__':

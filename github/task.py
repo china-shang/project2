@@ -15,4 +15,5 @@ class Task(BaseTask):
         self['is_org'] = is_org
     
     def to_tuple(self):
+        #use for mysql statement
         return (self['name'], self['is_org'])

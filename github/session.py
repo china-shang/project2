@@ -23,8 +23,8 @@ class Session(ClientSession):
     
     async def _request(self, *args, **kargs):
         self.statist.increase_req()
-        logger.debug(f"{self.statist.get_avg_speed()[2]:.2f}")
-        _, _, rate = self.statist.get_avg_speed()
+        repos_rate, users_rate, rate = self.statist.get_recent_speed()
+        logger.debug( f"req_rate:{rate:.2f}")
         if rate > 1.0:
             expect_time = self.statist.req_count / 1.0
             during = time.time() - self.statist.start_time

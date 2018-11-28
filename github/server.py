@@ -7,6 +7,7 @@ from base.transport import Transport
 from github.task import Task
 from github.taskprovider import TaskProvider
 from logger import get_logger
+from config import Config
 from protocol import Protocol
 
 logger = get_logger(__name__)
@@ -36,7 +37,8 @@ class Server(Transport):
         self._connected = True
         self._conn_evt.set()
         await super().start()
-        await self._task_pool.start()
+        if not self._task_pool.get_status():
+            await self._task_pool.start()
         print(f"start server at {self._host}:{self._port}")
         asyncio.ensure_future(self.run())
         
@@ -166,6 +168,7 @@ class Server(Transport):
 async def start(args=[("localhost",8888)]):
     task_pool=TaskProvider()
     logger.info("start muti servers")
+    print(args)
     await task_pool.start()
     for i in args:
         srv = Server(host=i[0],port=i[1],task_pool=task_pool)
@@ -178,7 +181,11 @@ async def start(args=[("localhost",8888)]):
 
 def run(host="localhost",port=8888):
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(start())
+    # loop.run_until_complete(start(args=[("localhost",8888),("54.250.173.187",1111)]))
+    nodes=Config.nodesconfig['github']
+    print(nodes)
+    loop.run_until_complete(start(args=nodes))
+    #loop.run_until_complete(start(args=[("localhost",8888)]))
     
 if __name__ == '__main__':
     run()

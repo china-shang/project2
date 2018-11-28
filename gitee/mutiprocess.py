@@ -10,10 +10,10 @@ import asyncio
 def start(count=4):
     pool=Pool(count)
     args=[
-        ("localhost",8888),
         ("localhost",8889),
-        ("localhost",8890),
-        ("localhost",8891)
+        #("localhost",8890),
+        #("localhost",8891),
+        #("localhost",8892)
     ]
     pool.starmap_async(run,args)
     time.sleep(6)

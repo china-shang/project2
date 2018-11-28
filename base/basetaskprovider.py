@@ -136,6 +136,7 @@ class BaseTaskProvider(BaseLooper):
                     self._done.clear()
                     await self._done.wait()
                     if len(self._get_buf_user) > 0:
+                        logger.info(f"no repos,now get user task")
                         res = self._get_task(more)
                         break
         else:
@@ -165,7 +166,7 @@ class BaseTaskProvider(BaseLooper):
         put  task
         """
         self._put_buf.add(task)
-        logger.debug(f"will put task{task.name}")
+        # logger.debug(f"will put task{task.name}")
         if len(self._put_buf) > self._max_buf:
             self._put_evt.set()
     
@@ -174,7 +175,7 @@ class BaseTaskProvider(BaseLooper):
         mark task complete
         """
         self._complete_buf.add(task)
-        logger.debug(f"will complete task{task.name}")
+        # logger.debug(f"will complete task{task.name}")
         if len(self._complete_buf) > self._max_buf:
             self._complete_evt.set()
     

@@ -10,6 +10,7 @@ from github.client import Client
 from statist import Statist
 from datastore import Store
 from base.protocol import Protocol as Pro
+from config import Config
 
 logger = get_logger(__name__)
 
@@ -24,6 +25,7 @@ class WorkerPool(BaseWorkerPool):
         self._workers_pending=set()
         self._workers_running=set()
         self._fut=asyncio.Future()
+        self._now=0
         
         
         for i in range(max_size):
@@ -35,6 +37,8 @@ class WorkerPool(BaseWorkerPool):
             logger.info(f"worker num will > max_size")
             return
         for i in range(count):
+            if len(self._workers_pending)==0:
+                return
             w=self._workers_pending.pop()
             self._workers_running.add(w)
             asyncio.ensure_future(w.start())
@@ -45,6 +49,8 @@ class WorkerPool(BaseWorkerPool):
             logger.info(f"worker num will < 1")
             return
         for i in range(count):
+            if len(self._workers_running)==0:
+                return
             w=self._workers_running.pop()
             self._workers_pending.add(w)
             asyncio.ensure_future(w.stop())
@@ -60,8 +66,15 @@ class WorkerPool(BaseWorkerPool):
             
             if req_rate < RateLimit.get_req_rate_limit() * 0.8:
                 self.increase_worker()
+                
+            logger.info(f"recent_repos_rate={repos_rate_req_rate:.2f} "
+                        f"recent_users_rate={users_rate:.2f}")
+            repos_rate_req_rate, users_rate, req_rate = \
+                self._statist.get_avg_speed()
+            logger.info(f"avg_repos_rate={repos_rate_req_rate:.2f} "
+                        f"avg_users_rate={users_rate:.2f}")
             
-            await asyncio.sleep(3)
+            await asyncio.sleep(5)
     
     async def start(self):
         await super().start()
@@ -74,7 +87,9 @@ class WorkerPool(BaseWorkerPool):
         for i in self._workers_pending:
             await i.start()
             self._workers_running.add(i)
+        self._now=len(self._workers_running)
         self._workers_pending.clear()
+        asyncio.ensure_future(self.run())
     
     async def stop(self):
         return await super().stop()
@@ -90,6 +105,7 @@ def run(host="localhost",port=8888):
 
 
 if __name__ == '__main__':
-    run()
+    config=Config.nodeconfig['github']
+    run(**config)
     
 

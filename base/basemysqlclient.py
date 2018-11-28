@@ -56,6 +56,7 @@ class BaseMysqlClient(object):
          where name in {};
         '''
     check_body = 'SELECT name FROM gitee where `name` in {};'
+    mark_fail_body=' update gitee set users_doing=0,repos_doing=0;'
     
     def __init__(self, addr="localhost", port=3306,
                  config=Config.init_mysql_config(), autocommit=False):

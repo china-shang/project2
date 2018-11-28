@@ -35,12 +35,14 @@ class Spider(BaseSpider):
             self._session = Session(headers=self.header,
                                     timeout=self._timeout)
         async with self._session.post(self.api_url, json=data) as resp:
-            remaining = resp.headers.get('X-RateLimit-Remaining')
+            remaining = int(resp.headers.get('X-RateLimit-Remaining'))
             reset_time = float(resp.headers.get('X-RateLimit-Reset'))
             logger.info(f"remain={remaining},reset={time.ctime(reset_time)}")
+            sleep_time=reset_time-time.time()
             if remaining == 0:
-                logger.warning(f"no remain req count ,sleep 30s")
-                await asyncio.sleep(30)
+                logger.warning(f"no remain req count ,sleep {sleep_time:.2f}s")
+                Session.statist.record_error(sleep_time)
+                await asyncio.sleep(sleep_time)
             res = await resp.json()
             return res
     

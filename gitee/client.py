@@ -5,6 +5,7 @@ import struct
 from base.transport import Transport
 from logger import get_logger
 from base.protocol import Protocol
+import gc
 
 logger = get_logger(__name__)
 

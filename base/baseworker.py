@@ -19,7 +19,7 @@ class BaseWorker(BaseLooper):
         start worker
         """
         await super().start()
-        if not self._task_pool.get_status():
+        if not self._task_pool.is_running():
             await self._task_pool.start()
         
         asyncio.ensure_future(self.run())

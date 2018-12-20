@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import asyncio
+import sys
+import os
+sys.path.insert(0,os.path.realpath("../"))
 
+import asyncio
 import jinja2
 from aiohttp import web
 
@@ -36,97 +39,6 @@ env = jinja2.Environment(loader=loader)
 class Hander(object):
     def get(self, data: dict):
         
-        {'took': 12, 'timed_out': False, '_shards': {'total': 5, 'successful': 5, 'skipped': 0, 'failed': 0},
-         'hits': {'total': 1212, 'max_score': 29.5795, 'hits': [
-             {'_index': 'repo', '_type': '_doc', '_id': 'LTVuK2cBmMsYjO0YHcip', '_score': 29.5795,
-              '_source': {'name': 'java', 'url': 'https://github.com/SirEOF/java',
-                          'description': 'Rosette API Client Library for Java', 'updatedAt': '2018-01-01T20:27:57Z',
-                          'projectsUrl': 'https://github.com/SirEOF/java/projects', 'forkCount': 0,
-                          'languages': {'nodes': [{'name': 'Java'}, {'name': 'Python'}, {'name': 'Shell'}]},
-                          'stargazers': {'totalCount': 0}, 'watchers': {'totalCount': 1}},
-              'highlight': {'languages.nodes.name': ['<em>Python</em>'], 'name': ['<em>java</em>'],
-                            'description': ['Rosette API Client Library for <em>Java</em>']}},
-             {'_index': 'repo', '_type': '_doc', '_id': 'VS1sK2cBmMsYjO0YAOau', '_score': 29.324688,
-              '_source': {'name': 'java', 'url': 'https://github.com/SirEOF/java',
-                          'description': 'Rosette API Client Library for Java', 'updatedAt': '2018-01-01T20:27:57Z',
-                          'projectsUrl': 'https://github.com/SirEOF/java/projects', 'forkCount': 0,
-                          'languages': {'nodes': [{'name': 'Java'}, {'name': 'Python'}, {'name': 'Shell'}]},
-                          'stargazers': {'totalCount': 0}, 'watchers': {'totalCount': 1}},
-              'highlight': {'languages.nodes.name': ['<em>Python</em>'], 'name': ['<em>java</em>'],
-                            'description': ['Rosette API Client Library for <em>Java</em>']}},
-             {'_index': 'repo', '_type': '_doc', '_id': 'xjBsK2cBmMsYjO0YmCgs', '_score': 8.48684,
-              '_source': {'name': 'WebProgram', 'url': 'https://github.com/cryptomanic/WebProgram',
-                          'description': 'A simple web application using HTML, CSS and Python.',
-                          'updatedAt': '2016-02-01T14:23:46Z',
-                          'projectsUrl': 'https://github.com/cryptomanic/WebProgram/projects', 'forkCount': 0,
-                          'languages': {'nodes': [{'name': 'Python'}, {'name': 'CSS'}, {'name': 'HTML'}]}},
-              'highlight': {'languages.nodes.name': ['<em>Python</em>'],
-                            'description': ['A simple <em>web</em> application using <em>HTML</em>, CSS and Python.']}},
-             {'_index': 'repo', '_type': '_doc', '_id': '-DBsK2cBmMsYjO0YmCgs', '_score': 8.399796,
-              '_source': {'name': 'WebProgram', 'url': 'https://github.com/cryptomanic/WebProgram',
-                          'description': 'A simple web application using HTML, CSS and Python.',
-                          'updatedAt': '2016-02-01T14:23:46Z',
-                          'projectsUrl': 'https://github.com/cryptomanic/WebProgram/projects', 'forkCount': 0,
-                          'languages': {'nodes': [{'name': 'Python'}, {'name': 'CSS'}, {'name': 'HTML'}]}},
-              'highlight': {'languages.nodes.name': ['<em>Python</em>'],
-                            'description': ['A simple <em>web</em> application using <em>HTML</em>, CSS and Python.']}},
-             {'_index': 'repo', '_type': '_doc', '_id': 'dzZuK2cBmMsYjO0YV40v', '_score': 8.041086,
-              '_source': {'name': 'python-goose', 'url': 'https://github.com/hanmichael/python-goose',
-                          'description': 'Html Content / Article Extractor, web scrapping lib in Python',
-                          'updatedAt': '2017-04-08T08:16:09Z',
-                          'projectsUrl': 'https://github.com/hanmichael/python-goose/projects', 'forkCount': 0,
-                          'languages': {'nodes': [{'name': 'Python'}, {'name': 'HTML'}]},
-                          'stargazers': {'totalCount': 0},
-                          'watchers': {'totalCount': 1}}, 'highlight': {'languages.nodes.name': ['<em>Python</em>'],
-                                                                        'description': [
-                                                                            '<em>Html</em> Content / Article Extractor, <em>web</em> scrapping lib in Python']}},
-             {'_index': 'repo', '_type': '_doc', '_id': 'CzZuK2cBmMsYjO0YWJEn', '_score': 8.041086,
-              '_source': {'name': 'python-goose', 'url': 'https://github.com/hanmichael/python-goose',
-                          'description': 'Html Content / Article Extractor, web scrapping lib in Python',
-                          'updatedAt': '2017-04-08T08:16:09Z',
-                          'projectsUrl': 'https://github.com/hanmichael/python-goose/projects', 'forkCount': 0,
-                          'languages': {'nodes': [{'name': 'Python'}, {'name': 'HTML'}]},
-                          'stargazers': {'totalCount': 0},
-                          'watchers': {'totalCount': 1}}, 'highlight': {'languages.nodes.name': ['<em>Python</em>'],
-                                                                        'description': [
-                                                                            '<em>Html</em> Content / Article Extractor, <em>web</em> scrapping lib in Python']}},
-             {'_index': 'repo', '_type': '_doc', '_id': 'ujhuK2cBmMsYjO0Y3omv', '_score': 8.041086,
-              '_source': {'name': 'python-goose', 'url': 'https://github.com/CaryLeo7/python-goose',
-                          'description': 'Html Content / Article Extractor, web scrapping lib in Python',
-                          'updatedAt': '2017-01-14T14:18:03Z',
-                          'projectsUrl': 'https://github.com/CaryLeo7/python-goose/projects', 'forkCount': 0,
-                          'languages': {'nodes': [{'name': 'Python'}, {'name': 'HTML'}]},
-                          'stargazers': {'totalCount': 0},
-                          'watchers': {'totalCount': 0}}, 'highlight': {'languages.nodes.name': ['<em>Python</em>'],
-                                                                        'description': [
-                                                                            '<em>Html</em> Content / Article Extractor, <em>web</em> scrapping lib in Python']}},
-             {'_index': 'repo', '_type': '_doc', '_id': 'zzhuK2cBmMsYjO0Y3omv', '_score': 8.041086,
-              '_source': {'name': 'python-goose', 'url': 'https://github.com/CaryLeo7/python-goose',
-                          'description': 'Html Content / Article Extractor, web scrapping lib in Python',
-                          'updatedAt': '2017-01-14T14:18:03Z',
-                          'projectsUrl': 'https://github.com/CaryLeo7/python-goose/projects', 'forkCount': 0,
-                          'languages': {'nodes': [{'name': 'Python'}, {'name': 'HTML'}]},
-                          'stargazers': {'totalCount': 0},
-                          'watchers': {'totalCount': 0}}, 'highlight': {'languages.nodes.name': ['<em>Python</em>'],
-                                                                        'description': [
-                                                                            '<em>Html</em> Content / Article Extractor, <em>web</em> scrapping lib in Python']}},
-             {'_index': 'repo', '_type': '_doc', '_id': 'aThuK2cBmMsYjO0YzEyN', '_score': 8.041086,
-              '_source': {'name': 'python-goose', 'url': 'https://github.com/id0o0bi/python-goose',
-                          'description': 'Html Content / Article Extractor, web scrapping lib in Python',
-                          'updatedAt': '2016-12-22T14:40:39Z',
-                          'projectsUrl': 'https://github.com/id0o0bi/python-goose/projects', 'forkCount': 0,
-                          'languages': {'nodes': [{'name': 'Python'}, {'name': 'HTML'}]}},
-              'highlight': {'languages.nodes.name': ['<em>Python</em>'], 'description': [
-                  '<em>Html</em> Content / Article Extractor, <em>web</em> scrapping lib in Python']}},
-             {'_index': 'repo', '_type': '_doc', '_id': 'cy5sK2cBmMsYjO0YMqdm', '_score': 8.039774,
-              '_source': {'name': 'python-goose', 'url': 'https://github.com/mack007liu/python-goose',
-                          'description': 'Html Content / Article Extractor, web scrapping lib in Python',
-                          'updatedAt': '2015-04-08T08:32:05Z',
-                          'projectsUrl': 'https://github.com/mack007liu/python-goose/projects', 'forkCount': 0,
-                          'languages': {'nodes': [{'name': 'Python'}, {'name': 'HTML'}]}},
-              'highlight': {'languages.nodes.name': ['<em>Python</em>'], 'description': [
-                  '<em>Html</em> Content / Article Extractor, <em>web</em> scrapping lib in Python']}}]}}
-        
         query: str = data['query']
         page: int = data['page']
         res = {}
@@ -148,36 +60,47 @@ class Hander(object):
                 i['_source']['name'] = i['highlight']['name'][0]
             else:
                 i['_source']['name'] = i['_source']['name']
-            lang = i['_source']['languages']['nodes']
+            lang = i['_source'].get("langs",[])
             i['_source']['lang'] = []
-            if 'languages.nodes.name' in i['highlight']:
-                i['_source']['lang'].extend(i['highlight']['languages.nodes.name'])
+            if 'langs' in i['highlight']:
+                i['_source']['lang'].extend(i['highlight']['langs'])
             # else:
             #     i['_source']['lang']=i['_source']['languages']['nodes'][0]['name']
             for j in lang:
                 if len(i['_source']['lang'])>3:
                     break
-                if not inhightlight(j['name'], i['_source']['lang']):
-                    i['_source']['lang'].append(j['name'])
+                if not inhightlight(j, i['_source']['lang']):
+                    i['_source']['lang'].append(j)
 
             if len(i['_source']['lang'])==0:
                 i['_source']['lang']=["unknown"]
+                
+            if i['_source'].get('license',None) and len(i['_source']['license'])==0:
+                i['_source']['license']=None
             
             
             try:
-                i['_source']['star'] = i['_source']['stargazers']['totalCount']
+                i['_source']['star'] = i['_source']['stars']
             except KeyError as e:
                 print(e)
                 i['_source']['star'] = 0
             try:
-                i['_source']['watch'] = i['_source']['watchers']['totalCount']
+                i['_source']['watch'] = i['_source']['watchers']
             except KeyError as e:
                 print(e)
                 i['_source']['watch'] = 0
+            
+            s:dict
+            # s.setdefault("license",s.get())
+            # i['_source'].set
             i['_source']['user'] = i['_source']['url'].rsplit("/", 2)[-2]
-            i['_source']['src'] = "Github"
-            i['_source']['license'] = "GPL3"
-            i['_source']['fork'] = i['_source']['forkCount']
+            # i['_source']['src'] = "Github"
+            i['_source']['fork'] = i['_source']['forks']
+            
+            if "T" in i['_source']['updatedAt']:
+                updated=i['_source']['updatedAt'].split("T")[0]
+                i['_source']['updatedAt']=updated
+                
             res['repo'].append(i['_source'])
         
         print(res)
@@ -224,20 +147,21 @@ class Server(object):
             q=q,
             repos=res['repo'],
             page={"start": start, "end": end, "cur": page, "url": range(start, end + 2),
-                  "more":page!=all}
+                  "more":page<all}
         )
         return web.Response(body=s, content_type="text/html")
     
     async def home(self, req: web.Request):
         hander = Hander()
         res = hander.get({
-            "query": "sdfj sdjf",
+            "query": "asdjfasiodfjasdlkfjas234234",
             "page": 1
         })
         tmp = env.get_template("main1.html")
         with open("main.html", "w") as fp:
             s = tmp.render(repos=res['repo'],
-                           page={"start": 4, "end": 11, "cur": 8, "url": ['1', '3', '4', '5']}
+                           page={"start": 1, "end": 1, "cur": 1, "url": ['1', '3', '4', '5']},
+                           title="main"
                            )
             fp.write(s)
         # data = await req.json()
@@ -280,8 +204,8 @@ async def test():
     t = Server()
     
     app = web.Application()
-    app.add_routes([web.get('/home', t.home),
-                    web.get('/', t.search)])
+    app.add_routes([web.get('/', t.home),
+                    web.get('/search', t.search)])
     
     runner = web.AppRunner(app)
     await runner.setup()
@@ -296,7 +220,7 @@ async def test():
 def test1():
     hander = Hander()
     res = hander.get({
-        "query": "sdfj sdjf",
+        "query": "s",
         "page": 1
     })
     tmp = env.get_template("repos_li.html")
@@ -304,7 +228,8 @@ def test1():
 
 
 if __name__ == "__main__":
+    # test1()
+    # exit()
     loop = asyncio.get_event_loop()
     loop.run_until_complete(test())
     
-    test1()

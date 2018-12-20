@@ -154,7 +154,6 @@ class MysqlClient(BaseMysqlClient):
             return
         repeat = await self._check_exist(data)
         data.difference_update(repeat)
-        
         if len(data) == 0:
             return
         
@@ -175,6 +174,7 @@ class MysqlClient(BaseMysqlClient):
     async def _check_exist(self, data: set):
         if not data or len(data) < 0:
             return set()
+        
         async with self._pool.acquire() as con:
             async with con.cursor() as cur:
                 names={i[0] for i in data}

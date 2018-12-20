@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import sys
+import os
+sys.path.insert(0,os.path.realpath("../"))
+
 import asyncio
 import json
 import struct
@@ -36,7 +42,7 @@ class Server(Transport):
         self._connected = True
         self._conn_evt.set()
         await super().start()
-        if not self._task_pool.get_status():
+        if not self._task_pool.is_running():
             await self._task_pool.start()
         print(f"start server at {self._host}:{self._port}")
         asyncio.ensure_future(self.run())
@@ -145,12 +151,12 @@ class Server(Transport):
 
 async def start(args=[("localhost",8889)]):
     task_pool=TaskProvider()
-    logger.info("start muti servers")
+    logger.info(f"start muti servers {args}")
     await task_pool.start()
     for i in args:
         srv = Server(host=i[0],port=i[1],task_pool=task_pool)
-        logger.info(f"start server:{i[0]}:{i[1]}")
         await srv.start()
+        logger.info(f"start server:{i[0]}:{i[1]}")
         f = await srv.start_worker()
     
     forever=asyncio.Future()
@@ -159,10 +165,11 @@ async def start(args=[("localhost",8889)]):
 def run(host="localhost",port=8888):
     loop = asyncio.get_event_loop()
     node=Config.nodesconfig['gitee']
+    print(f"node={node}")
     loop.run_until_complete(start(args=node))
     #loop.run_until_complete(start(host=host,port=port))
 
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(start())
+    loop.run_until_complete(run())

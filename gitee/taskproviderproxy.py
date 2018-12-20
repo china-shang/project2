@@ -45,6 +45,7 @@ class BaseTaskProviderProxy(TaskProvider):
         #                       Pro.Control,
         #                       Pro.Success,
         #                       json.dumps(None).encode())
+        
     async def update(self):
         logger.info(f"in update from {self.name}")
         req_data = self.export_buf()

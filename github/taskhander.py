@@ -14,6 +14,9 @@ class TaskHander(BaseLooper):
         super().__init__()
         self._task = task
         self._spider = spider
+        self._repos = []
+        self._users = set()
+        self._orgs = set()
         
         self._init_stat()
 
@@ -41,10 +44,11 @@ class TaskHander(BaseLooper):
         self._repos_end_cursor = ""
         self._followers_end_cursor = ""
         self._following_end_cursor = ""
+
+        self._repos.clear()
+        self._users.clear()
+        self._orgs.clear()
         
-        self._repos = []
-        self._users = set()
-        self._orgs = set()
     
     def get_result(self) -> tuple:
         """
@@ -315,7 +319,7 @@ class TaskHander(BaseLooper):
                 # no more data
                 return True
     
-    async def _handle_user_result(self, data):
+    async def _handle_user_result(self, data:dict):
         users = set()
         repos = []
         if self._has_more_followers:
@@ -350,6 +354,8 @@ class TaskHander(BaseLooper):
                 ['organizations']['pageInfo']['endCursor']
             org_res = data['user']['organizations']['nodes']
             self._orgs.update({i['login'] for i in org_res})
+        
+        del data
         
         if self._task.is_more:
             logger.info(f"get users {len(users)} from {self._task.name}")

@@ -28,7 +28,7 @@ def test(a,b):
 async def work(host="localhost",port=8888):
     worker_pool=WorkerPool()
     await worker_pool.start()
-    await worker_pool._fut
+    await worker_pool.done
     
 if __name__ == '__main__':
     start()

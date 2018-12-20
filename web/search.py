@@ -4,18 +4,20 @@
 import re
 
 from elasticsearch import Elasticsearch
+import sys
 
 server = "http://localhost"
 es = Elasticsearch(server)
-query = "lang:python web html | java)"
+query = "langs:python|java -web ~#$% 数据库设计"
 
 
-def extract(s) -> dict:
-    t = re.sub(r'\s*\|\s*', "|", s)
+def extract(s:str) -> dict:
+    s = re.sub(r'[%#@!$~]+', " ", s)
+    s = re.sub(r'\s*\|\s*', "|", s)
     # remove space with around |
-    t = re.sub(r"\s+", " ", s)
+    s = re.sub(r"\s+", " ", s)
     # remove repeat space
-    l = t.split(" ")
+    l = s.split(" ")
     d = {}
     for i in l.copy():
         if ":" in i:
@@ -34,7 +36,7 @@ def extract(s) -> dict:
     return d
 
 
-def search(query: str, page=1) -> dict:
+def search(query: str, page=1,getforked=True) -> dict:
     d = extract(query)
     body = {
         "query": {
@@ -52,7 +54,7 @@ def search(query: str, page=1) -> dict:
                                 
                                 , "script_score": {
                                 "script": {
-                                    "source": "Math.log(2 + doc['forkCount'].value+doc['stargazers.totalCount'].value+doc['watchers.totalCount'].value)"
+                                    "source": "1+Math.log(2 + doc['forks'].value+doc['stars'].value+doc['watchers'].value)"
                                 }
                             }
                             }
@@ -67,8 +69,8 @@ def search(query: str, page=1) -> dict:
                 # }
                 
                 #     "simple_query_string": {
-                #         "query": d['lang'],
-                #         "fields": ['languages.nodes.name'],
+                #         "query": d['langs'],
+                #         "fields": ['langsuages.nodes.name'],
                 #         "default_operator": "AND"
                 #     }
                 # }
@@ -92,16 +94,34 @@ def search(query: str, page=1) -> dict:
             "fields": {
                 "name": {},
                 "description": {},
-                
+
             },
             "boundary_max_scan": 1000,
             "boundary_chars": ""
-            
+
         }
     }
-    
-    # lang filter
-    if "lang" in d:
+
+    if not getforked:
+        body['query']['bool']['filter'] = [
+            {
+                # "match_phrase_prefix": {
+                #     "name":{
+                #         "query":"n"
+                #         ,"max_expansions":1000
+                #     }
+                # }
+                "term":{
+                    "isFork":False
+                }
+            
+            }
+        ]
+    # langs filter
+    d:dict
+    # if "langs" in d:
+    #     d.pop("langs")
+    if "langs" in d:
         if not "filter" in body['query']['bool']:
             body['query']['bool']['filter'] = [
                 {
@@ -113,8 +133,12 @@ def search(query: str, page=1) -> dict:
                     # }
                     
                     "simple_query_string": {
-                        "query": d['lang'],
-                        "fields": ['languages.nodes.name'],
+                        "query": d['langs'],
+                        "fields": ['langs'],
+                        # "term":{
+                        #     "langs":[d['langs']]
+                        # },
+                        #
                         "default_operator": "AND"
                     }
                 }
@@ -123,17 +147,17 @@ def search(query: str, page=1) -> dict:
             body['query']['bool']['filter'].append(
                 {
                     "simple_query_string": {
-                        "query": d['lang'],
-                        "fields": ['languages.nodes.name'],
+                        "query": d['langs'],
+                        "fields": ['langs'],
                         "default_operator": "AND"
                     }
                 }
             
             )
-        if "languages.nodes.name" in body['highlight']["fields"]:
+        if "langs" in body['highlight']["fields"]:
             pass
         else:
-            body['highlight']["fields"]['languages.nodes.name'] = {}
+            body['highlight']["fields"]['langs'] = {}
     
     res = es.search(index="repo",
                     body=body, size=10, from_=(page - 1) * 10)
@@ -142,4 +166,4 @@ def search(query: str, page=1) -> dict:
 
 
 if __name__ == '__main__':
-    search(query)
+    search(query,getforked=False)

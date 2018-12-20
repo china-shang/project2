@@ -3,6 +3,7 @@ import os
 import time
 
 from logger import get_logger
+import gc
 
 logger = get_logger(__name__)
 

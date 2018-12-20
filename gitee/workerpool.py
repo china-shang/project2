@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import sys
+import os
+sys.path.insert(0,os.path.realpath("../"))
+
 import asyncio
 import json
 
@@ -10,12 +16,15 @@ from statist import Statist
 from datastore import Store
 from base.protocol import Protocol as Pro
 from config import Config
+from pympler import muppy,summary,tracker
+import objgraph
+import gc
 
 logger = get_logger(__name__)
 
 
 class WorkerPool(BaseWorkerPool):
-    def __init__(self, statist: Statist = Statist(), max_size=10,host="localhost",port=8888):
+    def __init__(self, statist: Statist = Statist(), max_size=4,host="localhost",port=8888):
         super().__init__(statist, max_size)
         self._clt=Client(host=host,port=port)
         self._task_pool=BaseTaskProviderProxy(client=self._clt,name="nobug")
@@ -23,8 +32,9 @@ class WorkerPool(BaseWorkerPool):
         self.statist=Statist()
         self._workers_pending=set()
         self._workers_running=set()
-        self._fut=asyncio.Future()
+        self.done=asyncio.Future()
         
+        self.test=True
         
         for i in range(max_size):
             w=Worker(self._task_pool,self.store,statist,name=f"worker{i}")
@@ -55,13 +65,32 @@ class WorkerPool(BaseWorkerPool):
             repos_rate_req_rate, users_rate, req_rate = \
                 self._statist.get_recent_speed()
             
-            if req_rate > RateLimit.get_req_rate_limit() * 1.2:
-                self.decrease_worker()
+            # if req_rate > RateLimit.get_req_rate_limit() * 1.2:
+            #     self.decrease_worker()
+            #
+            # if req_rate < RateLimit.get_req_rate_limit() * 0.8:
+            #     self.increase_worker()
+            logger.info(f"recent_repos_rate={repos_rate_req_rate:.2f} "
+                        f"recent_users_rate={users_rate:.2f}")
+            logger.info(f"all get repos{self.statist.all_repo} "
+                        f"all complete users{self.statist.all_user}"
+                        )
             
-            if req_rate < RateLimit.get_req_rate_limit() * 0.8:
-                self.increase_worker()
+            await asyncio.sleep(5)
             
-            await asyncio.sleep(3)
+            if self.test:
+                self.test=False
+                objs=muppy.get_objects()
+                sum1=summary.summarize(objs)
+                ls=muppy.filter(objs,type([]))
+                import random
+                import time
+                idx=random.randint(0,len(ls))
+                file_name=str(time.time())+".png"
+                objgraph.show_refs(ls[idx:idx+3],filename=file_name)
+                objgraph.show_refs()
+                print(f"objs count ={gc.get_count()}")
+                
     
     async def start(self):
         await super().start()
@@ -75,6 +104,7 @@ class WorkerPool(BaseWorkerPool):
             await i.start()
             self._workers_running.add(i)
         self._workers_pending.clear()
+        asyncio.ensure_future(self.run())
     
     async def stop(self):
         return await super().stop()
@@ -82,7 +112,7 @@ class WorkerPool(BaseWorkerPool):
 async def test(host="localhost",port=8888):
     pool=WorkerPool(host=host,port=port)
     await pool.start()
-    await pool._fut
+    await pool.done
     
 def run(host="localhost",port=8888):
     loop=asyncio.get_event_loop()

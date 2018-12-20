@@ -67,7 +67,7 @@ class Worker(BaseWorker):
         self.extract_owners(users)
         self.extract_owners(orgs,is_org=True)
         self.extrack_repos(repos)
-    
+        
     async def get_task(self):
         task = await self._task_pool.get()
         if task:
@@ -94,7 +94,6 @@ class Worker(BaseWorker):
     #         if not is_usr:
     #             await self._handle_org()
     #
-    # # TODO get more attr like forked
     #
     # async def _handle_org(self):
     #     if self._task.is_more:

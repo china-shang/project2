@@ -2,7 +2,7 @@ from base.baserepos import BaseRepos
 
 
 class Repos(BaseRepos):
-    delagation = BaseRepos.delagation ^ {'nickname', 'author',
+    delagation = BaseRepos.delagation ^ {'nickname','url', 'author',
                                          'lang', 'viplevel',
                                          'desc', 'updatetime',
                                          'watch', 'star',
@@ -10,11 +10,12 @@ class Repos(BaseRepos):
     
     def __init__(self, name, nickname, author,
                  lang, viplevel, desc, updatetime,
-                 watch, star, fork,
+                 watch, star, fork,url,
                  isfork=False, forkfrom=None):
         super().__init__(name)
         self['nickname'] = nickname
         self['author'] = author
+        self['url'] = url
         self['lang'] = lang
         self['viplevel'] = viplevel
         self['desc'] = desc

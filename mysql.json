@@ -3,6 +3,7 @@
     "port":3306,
     "user":"root",
     "password":"asdfjk",
-    "db":"gitee"
+    "db":"gitee",
+    "maxsize": 1
 
 }

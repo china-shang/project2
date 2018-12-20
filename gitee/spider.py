@@ -57,15 +57,17 @@ class Spider(BaseSpider):
             text = await resp.text()
             sp = Soup(text, "lxml")
             pages = self.get_pager_count(sp)
-            sp=sp.select("div.project")
-            res.extend(sp)
+            t=sp.select("div.project")
+            sp.decompose()
+            res.extend(t)
             # print(pages,url.format(1))
 
         for i in range(2, pages + 1):
             async with self._session.get(url.format(i)) as resp:
                 text = await resp.text()
                 sp = Soup(text, "lxml")
-                sp=sp.select("div.project")
+                t=sp.select("div.project")
+                sp.decompose()
                 res.extend(sp)
         # logger.info(f"projects={res}")
         return res
@@ -95,6 +97,7 @@ class Spider(BaseSpider):
             sp = Soup(text, "lxml")
             # res.extend(sp)
             pages = self.get_pager_count(sp)
+            sp.decompose()
             # print(pages,url.format(1))
     
         for i in range(2, pages + 1):
@@ -102,6 +105,7 @@ class Spider(BaseSpider):
                 text = await resp.text()
                 sp = Soup(text, "lxml")
                 res.extend(sp.select(".user-list-item .header a"))
+                sp.decompose()
         return res
 
     async def fetch_followers(self):
@@ -112,12 +116,14 @@ class Spider(BaseSpider):
             sp = Soup(text, "lxml")
             res.extend(sp.select(".user-list-item .header a"))
             pages = self.get_pager_count(sp)
+            sp.decompose()
         
         for i in range(2, pages + 1):
             async with self._session.get(url.format(i)) as resp:
                 text = await resp.text()
                 sp = Soup(text, "lxml")
                 res.extend(sp.select(".user-list-item .header a"))
+                sp.decompose()
         return res
     
     async def fetch_stars(self):

@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sys 
+import os
+sys.path.insert(0,os.path.realpath("../"))
+
 import asyncio
 import json
 
@@ -24,7 +31,7 @@ class WorkerPool(BaseWorkerPool):
         self.statist=Statist()
         self._workers_pending=set()
         self._workers_running=set()
-        self._fut=asyncio.Future()
+        self.done=asyncio.Future()
         self._now=0
         
         
@@ -97,7 +104,7 @@ class WorkerPool(BaseWorkerPool):
 async def test(host="localhost",port=8888):
     pool=WorkerPool(host=host,port=port)
     await pool.start()
-    await pool._fut
+    await pool.done
 
 def run(host="localhost",port=8888):
     loop=asyncio.get_event_loop()

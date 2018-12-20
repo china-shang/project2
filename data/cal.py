@@ -12,16 +12,17 @@ def load(s) -> list:
         #print(e.pos)
         l.extend(load(s[:e.pos]))
         l.extend(load(s[e.pos:]))
-
     return l
 
 
-n=0
+repos=set()
 for i in glob.iglob("repo*"):
     with open(i) as f:
         l=load(f.read())
-        print(f"l={len(l)}")
-        n += len(l)
+        s={i['url'][19:]  for i in l}
+        repos.update(s)
 
-print(f"all repos={n}")
+        print(f"has={len(repos)}")
+
+print(f"all repos={len(repos)}")
 

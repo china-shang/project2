@@ -16,6 +16,7 @@ from statist import Statist
 from datastore import Store
 
 from logger import get_logger
+import gc
 
 logger = get_logger(__name__)
 
@@ -43,10 +44,13 @@ class Worker(BaseWorker):
             try:
                 await self.handle()
                 await self._task_pool.complete(self._task)
+                self._statist.increase_user()
                 logger.info(f"complete {self._task}")
             except Exception as e:
+                logger.error(f"e is {e}")
                 logger.error(f"task {self._task.name} error ,mark fail")
                 await self._task_pool.fail(self._task)
+                
     async def get_task(self):
         task = await self._task_pool.get()
         if task:
@@ -77,6 +81,8 @@ class Worker(BaseWorker):
     async def _handle(self):
         res = await self._spider.fetch(self._task.name)
         repos = self.extract_repos(res)
+        res.clear()
+        del res
         self._statist.increase_repos(len(repos))
         logger.info(f"get repos {len(repos)}")
         await self._store.put(repos)
@@ -106,6 +112,8 @@ class Worker(BaseWorker):
                     
                     repo_sp = sp.select_one(".main-pro-name .repository")
                     name = repo_sp['title']
+                    url = f"https://gitee.com{repo_sp['href']}"
+                    # print(f"url = {url}")
                     
                     forkfrom = sp.select_one(".fork-pro-name .repository")['href']
                     isfork = True
@@ -117,6 +125,8 @@ class Worker(BaseWorker):
                     
                     repo_sp = sp.select_one(".repository")
                     name = repo_sp['title']
+                    url = f"https://gitee.com{repo_sp['href']}"
+                    # print(f"url = {url}")
                     
                     forkfrom = None
                     isfork = False
@@ -148,8 +158,9 @@ class Worker(BaseWorker):
             # print(name,nickauthor,author,lang,viplevel,desc,updatetime,watch,
             #       star,fork,isfork,forkfrom)
             
+            sp.decompose()
             repos = Repos(name, nickauthor, author, lang, viplevel, desc, updatetime, watch,
-                          star, fork, isfork, forkfrom)
+                          star, fork, url,isfork, forkfrom)
             repos_set.add(repos)
         return repos_set
     
@@ -160,6 +171,7 @@ class Worker(BaseWorker):
         owners_set = set()
         for sp in owners:
             owners_set.add(sp['href'][1:])
+            sp.decompose()
         return owners_set
     
     def handle_abuse(self):

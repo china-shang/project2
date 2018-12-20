@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sys
+import os
+sys.path.insert(0,os.path.realpath("../"))
+
 import asyncio
 import json
 import struct
@@ -37,7 +44,7 @@ class Server(Transport):
         self._connected = True
         self._conn_evt.set()
         await super().start()
-        if not self._task_pool.get_status():
+        if not self._task_pool.is_running():
             await self._task_pool.start()
         print(f"start server at {self._host}:{self._port}")
         asyncio.ensure_future(self.run())

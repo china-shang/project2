@@ -10,7 +10,7 @@ class BaseLooper(object):
     def __init__(self):
         self._running = False
         
-    def get_status(self):
+    def is_running(self):
         return self._running
     
     async def start(self):

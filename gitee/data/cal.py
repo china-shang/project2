@@ -15,14 +15,18 @@ def load(s) -> list:
     return l
 
 
+n=0
 repos=set()
 for i in glob.iglob("repo*"):
     with open(i) as f:
         l=load(f.read())
+        n  += len(l)
         s={i['name'] + i['author'] for i in l}
         repos.update(s)
 
         print(f"has={len(repos)}")
+        print(f"about has={n}")
 
 print(f"all repos={len(repos)}")
+print(f"about all repos={n}")
 

@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
-sys.path.insert(0,os.path.realpath("../"))
+realpath=os.path.realpath(os.path.join(os.path.dirname(__file__), "../"))
+sys.path.insert(0,realpath)
 
 import asyncio
 import json
@@ -12,7 +13,7 @@ from base.transport import Transport
 from base.basetask import BaseTask
 from gitee.taskprovider import TaskProvider
 from logger import get_logger
-from protocol import Protocol
+from base.protocol import Protocol
 from config import Config
 
 logger = get_logger(__name__)

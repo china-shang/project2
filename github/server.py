@@ -3,7 +3,8 @@
 
 import sys
 import os
-sys.path.insert(0,os.path.realpath("../"))
+realpath=os.path.realpath(os.path.join(os.path.dirname(__file__), "../"))
+sys.path.insert(0,realpath)
 
 import asyncio
 import json
@@ -15,7 +16,7 @@ from github.task import Task
 from github.taskprovider import TaskProvider
 from logger import get_logger
 from config import Config
-from protocol import Protocol
+from base.protocol import Protocol
 
 logger = get_logger(__name__)
 

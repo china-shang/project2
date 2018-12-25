@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
-sys.path.insert(0,os.path.realpath("../"))
+realpath=os.path.realpath(os.path.join(os.path.dirname(__file__), "../"))
+sys.path.insert(0,realpath)
 
 import asyncio
 import jinja2
@@ -48,6 +49,7 @@ class Hander(object):
             query = "shop"
         resp = search(query, page=page)
         res = {}
+        res['took']=resp['took']
         res['total'] = resp['hits']['total']
         res['repo'] = []
         for i in resp['hits']['hits']:
@@ -55,6 +57,9 @@ class Hander(object):
                 i['_source']['desr'] = i['highlight']['description'][0]
             else:
                 i['_source']['desr'] = i['_source']['description']
+
+            #if len(i['_source']['desr']) == 120:
+                #i['_source']['desr'] += "..."
             
             if 'name' in i['highlight']:
                 i['_source']['name'] = i['highlight']['name'][0]
@@ -145,6 +150,8 @@ class Server(object):
         
         s = tmp.render(
             q=q,
+            total=res['total'], 
+            took=res['took'], 
             repos=res['repo'],
             page={"start": start, "end": end, "cur": page, "url": range(start, end + 2),
                   "more":page<all}
@@ -209,6 +216,7 @@ async def test():
     
     runner = web.AppRunner(app)
     await runner.setup()
+
     svr = web.TCPSite(runner, server_addr, server_port)
     await svr.start()
     

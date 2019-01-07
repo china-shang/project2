@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+
+<input name="country" list="country_name">
+<datalist id="country_name">
+    <option value="Afghanistan">
+    <option value="Albania">
+    <option value="Algeria">
+    <option value="Andorra">
+    <option value="Armenia">
+    <option value="Australia">
+    <option value="Austria">
+    <option value="Azerbaijan">
+        <!-- etc. -->
+</datalist>
+
+<ul>
+    <li><a tabindex="2" accesskey="h" href="here/">Here </a></li>
+    <li><a tabindex="3" accesskey="t" href="there/">There</a></li>
+    <li><a tabindex="1" accesskey="b" href="butHereFirst/">But here first</a></li>
+    <li hidden><a href="notHereThough/">Not here though</a></li>
+</ul>
+
+<p contenteditable="true" spellcheck="true">Hey, man, fiddle with my content.</p>
+<form>
+    <label>JG Ballard: <input contextmenu="ballard"></label>
+    <menu type="popup" id="ballard">
+        <menuitem label="High Rise">
+            <menuitem label="Concrete Island">
+                <menuitem label="The Drowned World">
+    </menu>
+</form>
+<h1>Datalist Demo</h1>
+<label for="default">Pick a programming language</label>
+<input type="text" id="default" list="languages" pattern="">
+<datalist id="languages">
+    <option value="HTML">
+    <option value="CSS">
+    <option value="JavaScript">
+    <option value="Java">
+    <option value="Ruby And Go">
+    <option value="PHP And HTML">
+    <option value="Go">
+    <option value="Erlang">
+    <option value="Python And C++">
+    <option value="C">
+    <option value="C#">
+    <option value="C++">
+</datalist>
+<style type="text/css">
+    img {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        color: #00aaaa;
+    }
+    h1:hover{
+        color: red;
+    }
+</style>
+
+<h1>This is a heading</h1>
+<img src="http://www.htmldog.com/figures/positionAbsolute.gif"/>
+<p>由于图像的 z-index 是 -1，因此它在文本的后面出现。</p>
+<script>
+    // $("img").hover(function () {
+    //     alert("jdf")
+
+    // })
+</script>
+<script>
+    document.querySelector("#default")
+        .oninput = function () {
+        this.pattern = `[\\w\\s+#]{${this.value.length}}`;
+    }
+
+</script>
+</body>
+</html>

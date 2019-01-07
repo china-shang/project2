@@ -1,0 +1,52 @@
+<table style="border-collapse:collapse;text-align:left;margin:30px auto 30px" id="nav" role="presentation">
+    <tbody>
+    <tr valign="top">
+        {% if page['cur']==1 %}
+        <td class="b navend"><span class="csb"
+                                   style="background:url(/images/nav_logo242.png) no-repeat;background-position:80px 0;width:28px"></span>
+        </td>
+        {% else %}
+        {% block previous %}
+        <td aria-level="3" class="b navend" role="heading"><a class="pn"
+                                                              href='{{page["cur"]-1}}'
+                                                              id="pnprev"><span class="csb ch"
+                                                                                style="background:url(/images/nav_logo242.png) no-repeat;background-position:800px 900;width:53px;float:right"></span><span
+                style="display:block;margin-right:35px;clear:right">上一页</span></a></td>
+        {% endblock previous %}
+        {% endif %}
+
+        {% block page %}
+        {% for i in range(page['start'],page['cur']) %}
+
+        <td><a aria-label="Page {{i}}" class="fl"
+               href={{i}}><span
+                class="csb ch"
+                style="background:url(/images/nav_logo242.png) no-repeat;background-position:80px 0;width:20px"></span>{{i}} </a>
+        </td>
+        {% endfor %}
+
+        <td class="cur"><span class="csb"
+                              style="background:url(/images/nav_logo242.png) no-repeat;background-position:80px 0;width:20px"></span>{{page['cur']}}
+        </td>
+        {% for i in range(page['cur']+1,page['end']+1) %}
+        <td><a aria-label="Page {{i}}" class="fl"
+               href={{i}}><span
+                class="csb ch"
+                style="background:url(/images/nav_logo242.png) no-repeat;background-position:80px 0;width:20px"></span>{{i}} </a>
+        </td>
+        {% endfor %}
+        {% endblock page %}
+
+        {% if page['more']  %}
+        {% block next %}
+        <td aria-level="3" class="b navend" role="heading"><a class="pn"
+                                                              href='{{page["cur"]+1}}'
+                                                              id="pnnext" style="text-align:left"><span class="csb ch"
+                                                                                                        style="background:url(/images/nav_logo242.png) no-repeat;background-position:80px 0;width:71px"></span><span
+                style="display:block;margin-left:53px">下一页</span></a></td>
+        {% endblock next %}
+        {% endif  %}
+    </tr>
+    </tbody>
+</table>
+

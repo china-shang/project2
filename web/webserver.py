@@ -167,6 +167,7 @@ class Server(object):
         tmp = env.get_template("main1.html")
         with open("main.html", "w") as fp:
             s = tmp.render(repos=res['repo'],
+                           main=True, 
                            page={"start": 1, "end": 1, "cur": 1, "url": ['1', '3', '4', '5']},
                            title="main"
                            )

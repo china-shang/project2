@@ -10,4 +10,4 @@
 
 之后使用ElasticSearch建立倒排索引，Jinja2编写界面。
 
-界面截图：![ScreenShot](Picture3.png))
+界面截图：![ScreenShot](Picture3.png)
